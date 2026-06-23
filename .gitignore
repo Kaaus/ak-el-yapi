@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/test-results
 
 # next.js
 /.next/
@@ -23,6 +24,12 @@
 # misc
 .DS_Store
 *.pem
+
+# local source videos; commit optimized web assets from public/videos instead
+/*.mov
+/*.mp4
+/*.m4v
+/*.webm
 
 # debug
 npm-debug.log*
