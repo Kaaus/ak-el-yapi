@@ -39,7 +39,11 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="mb-3 font-heading text-2xl font-bold text-brand-charcoal">İletişim</h2>
             <p className="leading-relaxed text-brand-charcoal/70">
-              Gizlilik talepleriniz için {siteConfig.email} adresinden veya {siteConfig.phoneDisplay} numarasından bize ulaşabilirsiniz.
+              Gizlilik talepleriniz için {siteConfig.email} adresinden veya{" "}
+              <a href={`tel:${siteConfig.phone}`} className="font-medium text-brand-charcoal hover:text-brand-gold">
+                {siteConfig.phoneDisplay}
+              </a>{" "}
+              numarasından bize ulaşabilirsiniz.
             </p>
           </section>
         </div>

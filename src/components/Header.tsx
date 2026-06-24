@@ -1,9 +1,10 @@
 "use client";
 
 import { type CSSProperties, useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Clock3, MapPin, Menu, Phone, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { siteConfig } from "@/lib/site";
 
@@ -16,6 +17,24 @@ const navLinks = [
   { name: "Kurumsal", href: "/kurumsal" },
   { name: "İletişim", href: "/iletisim" },
 ];
+
+const InstagramIcon = () => (
+  <svg
+    width="13"
+    height="13"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
 
 type Rgba = [number, number, number, number];
 type HeaderStyle = CSSProperties & { "--header-progress": number };
@@ -97,8 +116,8 @@ export default function Header() {
     WebkitBackdropFilter: `blur(${lerp(8, 16, progress)}px)`,
   };
 
-  const topBarDesktopStyle: CSSProperties = {
-    height: `${lerp(40, 0, contactProgress)}px`,
+  const topBarStyle: CSSProperties = {
+    height: `${lerp(36, 0, contactProgress)}px`,
     opacity: 1 - contactProgress,
     transform: `translateY(${-8 * contactProgress}px)`,
     clipPath: `inset(0 0 ${contactProgress * 100}% 0 round 10px)`,
@@ -114,8 +133,6 @@ export default function Header() {
   };
 
   const useLightText = progress > 0.28 && progress < 0.66;
-  const logoColor = useLightText ? "rgba(255, 255, 255, 0.96)" : "rgba(30, 34, 41, 1)";
-  const subtitleColor = useLightText ? "rgba(255, 255, 255, 0.62)" : "rgba(30, 34, 41, 0.55)";
   const navTextColor = useLightText ? "rgba(255, 255, 255, 0.86)" : "rgba(30, 34, 41, 0.72)";
   const navHoverColor = useLightText ? "hover:text-white" : "hover:text-brand-charcoal";
   const quoteIsDark = progress < 0.3 || progress > 0.66;
@@ -127,46 +144,41 @@ export default function Header() {
         style={shellStyle}
       >
         <div
-          className="hidden w-full overflow-hidden rounded-[10px] text-xs font-medium text-white/78 lg:flex"
-          style={topBarDesktopStyle}
+          className="flex w-full overflow-hidden rounded-[10px] border-b border-white/8 bg-[linear-gradient(90deg,rgba(17,20,24,0.97),rgba(30,34,41,0.93))] text-[11px] font-medium tracking-[0.01em] text-white/72"
+          style={topBarStyle}
         >
-          <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6">
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-gold shadow-[0_0_16px_rgba(195,176,145,0.75)]" />
-                <span>Pzt - Cmt: 08:30 - 19:00</span>
+          <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
+            <div className="flex min-w-0 items-center gap-3 sm:gap-4 lg:gap-5">
+              <div className="hidden items-center gap-2 whitespace-nowrap lg:flex">
+                <Clock3 size={13} className="text-brand-gold-light" aria-hidden="true" />
+                <span>
+                  {siteConfig.businessHours.days}: {siteConfig.businessHours.time}
+                </span>
               </div>
+              <span className="hidden h-3 w-px bg-white/14 lg:block" />
               <a
                 href={`tel:${siteConfig.phone}`}
-                className="transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
+                className="flex items-center gap-2 whitespace-nowrap transition-colors hover:text-brand-gold-light focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
               >
+                <Phone size={13} className="text-brand-gold-light" aria-hidden="true" />
                 {siteConfig.phoneDisplay}
               </a>
-              <span>
+              <span className="hidden h-3 w-px bg-white/14 md:block" />
+              <span className="hidden items-center gap-2 whitespace-nowrap text-white/58 md:flex">
+                <MapPin size={13} className="text-brand-gold-light" aria-hidden="true" />
                 {siteConfig.address.city}, {siteConfig.address.district}
               </span>
             </div>
-            <div className="flex items-center gap-4 text-white/58">
-              <a
-                href={siteConfig.social.facebook}
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
-                aria-label="Facebook"
-              >
-                Facebook
-              </a>
-              <span className="h-3 w-px bg-white/18" />
-              <a
-                href={siteConfig.social.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
-                aria-label="Instagram"
-              >
-                Instagram
-              </a>
-            </div>
+            <a
+              href={siteConfig.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/[0.055] px-2.5 py-1 text-white/72 transition-all hover:border-brand-gold-light/40 hover:bg-white/10 hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60 sm:px-3"
+              aria-label="AK-EL Yapı Instagram hesabı"
+            >
+              <InstagramIcon />
+              <span className="hidden sm:inline">Instagram</span>
+            </a>
           </div>
         </div>
 
@@ -176,24 +188,21 @@ export default function Header() {
         >
           <Link
             href="/"
-            className="group flex flex-col rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
+            className="group flex shrink-0 items-center rounded-xl border border-white/55 bg-white/92 px-2 py-1.5 shadow-[0_8px_24px_rgba(15,20,25,0.08)] transition-all hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
             aria-label="AK-EL Yapı ana sayfa"
           >
-            <span
-              className="font-heading text-2xl font-bold tracking-tight transition-colors duration-300"
-              style={{ color: logoColor }}
-            >
-              AK-EL <span className="text-brand-gold">Yapı</span>
-            </span>
-            <span
-              className="text-[10px] font-medium uppercase tracking-widest transition-colors duration-300"
-              style={{ color: subtitleColor }}
-            >
-              Premium Sistemler
-            </span>
+            <Image
+              src="/images/logo.png"
+              alt="AK-EL Yapı Premium Sistemler"
+              width={1204}
+              height={330}
+              priority
+              sizes="(max-width: 1023px) 132px, 154px"
+              className="h-8 w-auto object-contain sm:h-9 lg:h-[42px]"
+            />
           </Link>
 
-          <nav className="hidden items-center gap-7 md:flex">
+          <nav className="hidden items-center gap-7 lg:flex">
             <ul className="flex items-center gap-1">
               {navLinks.map((link) => {
                 const baseHref = link.href.split("#")[0];
@@ -231,7 +240,7 @@ export default function Header() {
           </nav>
 
           <button
-            className="rounded-full bg-white/72 p-2.5 text-brand-charcoal shadow-sm transition-colors hover:bg-white md:hidden"
+            className="rounded-full bg-white/72 p-2.5 text-brand-charcoal shadow-sm transition-colors hover:bg-white lg:hidden"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Menüyü aç"
           >
@@ -255,13 +264,20 @@ export default function Header() {
             className="pointer-events-auto fixed inset-0 z-50 flex flex-col bg-brand-charcoal/88 text-white backdrop-blur-2xl"
           >
             <div className="flex items-center justify-between border-b border-white/10 p-6">
-              <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex flex-col">
-                <span className="font-heading text-2xl font-bold tracking-tight text-white">
-                  AK-EL <span className="text-brand-gold">Yapı</span>
-                </span>
-                <span className="text-[10px] font-medium uppercase tracking-widest text-white/50">
-                  Premium Sistemler
-                </span>
+              <Link
+                href="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="rounded-xl bg-white px-2 py-1.5 shadow-lg shadow-black/10"
+                aria-label="AK-EL Yapı ana sayfa"
+              >
+                <Image
+                  src="/images/logo.png"
+                  alt="AK-EL Yapı Premium Sistemler"
+                  width={1204}
+                  height={330}
+                  sizes="132px"
+                  className="h-9 w-auto object-contain"
+                />
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}

@@ -32,7 +32,7 @@ export default function Footer() {
               AK-EL Yapı, Pimapen pencere ve kapı sistemlerinde kaliteli ürün, profesyonel montaj ve güvenilir hizmet anlayışıyla yaşam alanlarınıza değer katar.
             </p>
             <div className="flex gap-4">
-              <a href={siteConfig.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-gold-light hover:text-brand-charcoal transition-colors">
+              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-gold-light hover:text-brand-charcoal transition-colors">
                 <Instagram size={18} />
               </a>
               <a href={siteConfig.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-gold-light hover:text-brand-charcoal transition-colors">

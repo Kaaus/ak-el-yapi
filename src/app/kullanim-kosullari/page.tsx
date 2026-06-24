@@ -39,7 +39,11 @@ export default function TermsPage() {
           <section>
             <h2 className="mb-3 font-heading text-2xl font-bold text-brand-charcoal">İletişim</h2>
             <p className="leading-relaxed text-brand-charcoal/70">
-              Kullanım koşullarıyla ilgili sorularınız için {siteConfig.email} adresinden veya {siteConfig.phoneDisplay} numarasından bize ulaşabilirsiniz.
+              Kullanım koşullarıyla ilgili sorularınız için {siteConfig.email} adresinden veya{" "}
+              <a href={`tel:${siteConfig.phone}`} className="font-medium text-brand-charcoal hover:text-brand-gold">
+                {siteConfig.phoneDisplay}
+              </a>{" "}
+              numarasından bize ulaşabilirsiniz.
             </p>
           </section>
         </div>

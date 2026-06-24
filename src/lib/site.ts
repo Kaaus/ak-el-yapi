@@ -8,8 +8,12 @@ export const siteConfig = {
     "İstanbul'da premium Pimapen, PVC kapı, sürgülü sistem, panjur ve cam balkon çözümleri. Isı ve ses yalıtımı güçlü, profesyonel montajlı yaşam alanları.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://akelyapi.com.tr",
   locale: "tr_TR",
-  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+905555555555",
-  phoneDisplay: process.env.NEXT_PUBLIC_CONTACT_PHONE_DISPLAY ?? "+90 555 555 55 55",
+  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+905332480380",
+  phoneDisplay: process.env.NEXT_PUBLIC_CONTACT_PHONE_DISPLAY ?? "+90 533 248 03 80",
+  businessHours: {
+    days: "Pzt - Cmt",
+    time: "08:30 - 19:00",
+  },
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@akelyapi.com.tr",
   address: {
     street: process.env.NEXT_PUBLIC_ADDRESS_STREET ?? "Örnek Mahallesi, Yapı Caddesi, No: 1",
@@ -18,9 +22,11 @@ export const siteConfig = {
     country: process.env.NEXT_PUBLIC_ADDRESS_COUNTRY ?? "TR",
   },
   social: {
-    instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://www.instagram.com/akelyapi",
+    instagram:
+      process.env.NEXT_PUBLIC_INSTAGRAM_URL ??
+      "https://www.instagram.com/akelyapi55?igsh=YW45eGI2MGx0ZTl2",
     facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "https://www.facebook.com/akelyapi",
-    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/905555555555",
+    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/905332480380",
   },
 };
 

@@ -109,7 +109,9 @@ export default function ContactSection() {
                 <Phone size={24} />
               </div>
               <h3 className="mb-2 font-heading text-lg font-bold text-brand-charcoal">Bizi arayın</h3>
-              <p className="mb-4 text-sm text-brand-charcoal/60">Hafta içi: 09:00 - 18:00</p>
+              <p className="mb-4 text-sm text-brand-charcoal/60">
+                {siteConfig.businessHours.days}: {siteConfig.businessHours.time}
+              </p>
               <a href={`tel:${siteConfig.phone}`} className="text-xl font-medium text-brand-charcoal transition-colors hover:text-brand-gold">
                 {siteConfig.phoneDisplay}
               </a>
