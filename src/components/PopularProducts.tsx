@@ -37,14 +37,14 @@ const pimapenSeries = [
       { icon: Wind, text: "TPE Conta ile Tam Yalıtım" },
       { icon: Maximize, text: "Modern Çizgiler" }
     ],
-    image: "/images/carisma-series.webp",
+    image: "/images/nirvana-360.webp",
     imageMode: "contain",
     imageFrameClassName:
       "absolute -bottom-12 -right-16 top-14 left-[24%] transition-all duration-[1600ms] ease-out group-hover:translate-x-3 group-hover:scale-[1.04] group-hover:opacity-35 md:-right-20 md:left-[26%]",
     detailHref: "/urunler/carisma",
     cinematic: {
-      photo: "/images/carisma-series.webp",
-      video: "/videos/nirvana-showcase.mp4",
+      photo: "/images/nirvana-profile-detail.webp",
+      video: "/videos/nirvana.mp4",
       poster: "/images/nirvana-showcase-poster.webp",
       spin: "/images/carisma-series.webp",
     },
