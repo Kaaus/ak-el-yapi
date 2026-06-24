@@ -22,7 +22,7 @@ const pimapenSeries = [
     detailHref: "/urunler/nirvana",
     cinematic: {
       photo: "/images/nirvana-profile-detail.webp",
-      video: "/videos/nirvana-showcase.mp4",
+      video: "/videos/nirvana.mp4",
       poster: "/images/nirvana-showcase-poster.webp",
       spin: "/images/nirvana-360.webp",
     },
