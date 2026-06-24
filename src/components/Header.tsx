@@ -4,7 +4,7 @@ import { type CSSProperties, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Clock3, MapPin, Menu, Phone, X } from "lucide-react";
+import { Clock3, Menu, Phone, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { siteConfig } from "@/lib/site";
 
@@ -117,13 +117,15 @@ export default function Header() {
   };
 
   const topBarStyle: CSSProperties = {
-    height: `${lerp(36, 0, contactProgress)}px`,
+    height: `${lerp(38, 0, contactProgress)}px`,
     opacity: 1 - contactProgress,
     transform: `translateY(${-8 * contactProgress}px)`,
     clipPath: `inset(0 0 ${contactProgress * 100}% 0 round 10px)`,
-    backgroundColor: "rgba(17, 20, 24, 0.94)",
-    backdropFilter: "blur(10px)",
-    WebkitBackdropFilter: "blur(10px)",
+    backgroundImage:
+      "linear-gradient(105deg, rgba(22, 25, 29, 0.97) 0%, rgba(48, 47, 41, 0.93) 52%, rgba(24, 28, 32, 0.97) 100%)",
+    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(195,176,145,0.12)",
+    backdropFilter: "blur(16px)",
+    WebkitBackdropFilter: "blur(16px)",
   };
 
   const navRowStyle: CSSProperties = {
@@ -144,36 +146,33 @@ export default function Header() {
         style={shellStyle}
       >
         <div
-          className="flex w-full overflow-hidden rounded-[10px] border-b border-white/8 bg-[linear-gradient(90deg,rgba(17,20,24,0.97),rgba(30,34,41,0.93))] text-[11px] font-medium tracking-[0.01em] text-white/72"
+          className="relative flex w-full overflow-hidden rounded-[10px] border-b border-white/10 text-[10px] font-medium tracking-[0.01em] text-white/72 sm:text-[11px]"
           style={topBarStyle}
         >
-          <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
-            <div className="flex min-w-0 items-center gap-3 sm:gap-4 lg:gap-5">
-              <div className="hidden items-center gap-2 whitespace-nowrap lg:flex">
-                <Clock3 size={13} className="text-brand-gold-light" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-x-10 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-gold-light/35 to-transparent" />
+          <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-2.5 sm:px-5">
+            <div className="flex min-w-0 items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.035] px-2 py-1 tabular-nums sm:gap-3 sm:px-3">
+              <div className="flex items-center gap-1.5 whitespace-nowrap text-white/68">
+                <Clock3 size={12} className="shrink-0 text-brand-gold-light" aria-hidden="true" />
                 <span>
-                  {siteConfig.businessHours.days}: {siteConfig.businessHours.time}
+                  <span className="hidden sm:inline">{siteConfig.businessHours.days}: </span>
+                  {siteConfig.businessHours.time}
                 </span>
               </div>
-              <span className="hidden h-3 w-px bg-white/14 lg:block" />
+              <span className="h-3 w-px shrink-0 bg-white/14" />
               <a
                 href={`tel:${siteConfig.phone}`}
-                className="flex items-center gap-2 whitespace-nowrap transition-colors hover:text-brand-gold-light focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
+                className="flex items-center gap-1.5 whitespace-nowrap text-white/82 transition-colors hover:text-brand-gold-light focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
               >
-                <Phone size={13} className="text-brand-gold-light" aria-hidden="true" />
+                <Phone size={12} className="shrink-0 text-brand-gold-light" aria-hidden="true" />
                 {siteConfig.phoneDisplay}
               </a>
-              <span className="hidden h-3 w-px bg-white/14 md:block" />
-              <span className="hidden items-center gap-2 whitespace-nowrap text-white/58 md:flex">
-                <MapPin size={13} className="text-brand-gold-light" aria-hidden="true" />
-                {siteConfig.address.city}, {siteConfig.address.district}
-              </span>
             </div>
             <a
               href={siteConfig.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/[0.055] px-2.5 py-1 text-white/72 transition-all hover:border-brand-gold-light/40 hover:bg-white/10 hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60 sm:px-3"
+              className="flex h-7 shrink-0 items-center gap-2 rounded-full border border-brand-gold-light/20 bg-white/[0.055] px-2 text-white/76 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-brand-gold-light/45 hover:bg-brand-gold-light/10 hover:text-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60 sm:px-3"
               aria-label="AK-EL Yapı Instagram hesabı"
             >
               <InstagramIcon />
