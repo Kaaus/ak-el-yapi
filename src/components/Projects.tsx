@@ -15,13 +15,13 @@ const projects = [
   {
     title: "Cam Balkon Uygulaması",
     category: "Dış Mekan",
-    image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/references/cam-balkon-uygulamasi.jpg",
     size: "small"
   },
   {
     title: "Apartman Dairesi Yenileme",
     category: "Pencere Sistemleri",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2053&auto=format&fit=crop",
+    image: "/images/references/apartman-dairesi-yenilemesi.jpg",
     size: "small"
   },
   {
