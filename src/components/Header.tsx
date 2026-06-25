@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, useEffect, useState } from "react";
+import { type CSSProperties, type MouseEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -139,6 +139,24 @@ export default function Header() {
   const navHoverColor = useLightText ? "hover:text-white" : "hover:text-brand-charcoal";
   const quoteIsDark = progress < 0.3 || progress > 0.66;
 
+  const handleNavLinkClick = (href: string, closeMobileMenu = false) => (event: MouseEvent<HTMLAnchorElement>) => {
+    const targetPath = href.split("#")[0] || "/";
+    const isSameRoute = pathname === targetPath;
+
+    if (closeMobileMenu) {
+      setMobileMenuOpen(false);
+    }
+
+    if (!isSameRoute) {
+      return;
+    }
+
+    event.preventDefault();
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  };
+
   return (
     <header className="pointer-events-none fixed left-0 top-0 z-50 w-full px-3 pt-3 md:px-6">
       <div
@@ -211,6 +229,7 @@ export default function Header() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
+                      onClick={handleNavLinkClick(link.href)}
                       className={`group relative rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 ${navHoverColor} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60`}
                       style={{ color: navTextColor }}
                     >
@@ -298,7 +317,7 @@ export default function Header() {
                   >
                     <Link
                       href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={handleNavLinkClick(link.href, true)}
                       className="font-heading text-3xl font-medium text-white transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
                     >
                       {link.name}
