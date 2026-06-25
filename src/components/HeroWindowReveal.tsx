@@ -157,14 +157,14 @@ export default function HeroWindowReveal() {
 
             <motion.div
               style={{ width: centerBarWidth, opacity: compactViewport ? 0 : centerBarOpacity }}
-              className="absolute bottom-0 left-1/2 top-0 z-40 -translate-x-1/2 bg-white/92 shadow-[0_0_18px_rgba(0,0,0,0.22)]"
+              className="absolute bottom-0 left-1/2 top-0 z-20 -translate-x-1/2 bg-white/92 shadow-[0_0_18px_rgba(0,0,0,0.22)]"
             />
           </motion.div>
         </motion.div>
 
         <motion.div
           style={{ y: textY, scale: textScale, filter: textBlur }}
-          className="relative z-30 mt-12 flex max-w-5xl flex-col items-center justify-center px-6 text-center md:mt-20"
+          className="relative z-50 mt-12 flex max-w-5xl flex-col items-center justify-center px-6 text-center md:mt-20"
         >
           <motion.div
             initial={false}
@@ -203,7 +203,7 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.95, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: actionsOpacity }}
-            className="flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row"
+            className="relative z-[60] flex w-full flex-col items-center justify-center gap-4 rounded-[2rem] bg-brand-charcoal/10 p-1 backdrop-blur-[2px] sm:w-auto sm:flex-row"
           >
             <Link
               href="#iletisim"
