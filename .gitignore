@@ -26,7 +26,7 @@
 *.pem
 
 # local source videos; commit optimized web assets from public/videos instead
-/*.mov
+*.mov
 /*.mp4
 /*.m4v
 /*.webm
