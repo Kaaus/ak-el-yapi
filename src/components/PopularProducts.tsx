@@ -240,22 +240,22 @@ export default function PopularProducts() {
               ) : null}
 
               {/* Content Box */}
-              <div className={`absolute inset-0 z-30 flex flex-col justify-end p-8 md:p-12 ${series.detailHref ? "pointer-events-none" : ""}`}>
-                <div className={`transform translate-y-8 transition-transform duration-500 ease-out group-hover:translate-y-0 ${series.cinematic ? "max-w-[29rem]" : ""}`}>
+              <div className={`absolute inset-0 z-30 flex flex-col justify-end p-5 pb-7 sm:p-6 sm:pb-8 md:p-12 ${series.detailHref ? "pointer-events-none" : ""}`}>
+                <div className={`transform translate-y-0 transition-transform duration-500 ease-out md:translate-y-8 md:group-hover:translate-y-0 ${series.cinematic ? "max-w-[29rem]" : ""}`}>
                   
-                  <span className="inline-block px-4 py-1.5 bg-brand-gold/90 backdrop-blur-md text-brand-charcoal font-bold text-xs uppercase tracking-wider rounded-full mb-4 shadow-lg">
+                  <span className="mb-3 inline-block rounded-full bg-brand-gold/90 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-brand-charcoal shadow-lg backdrop-blur-md md:mb-4 md:px-4 md:text-xs">
                     {series.subtitle}
                   </span>
                   
-                  <h3 className="font-heading text-4xl md:text-5xl font-bold text-brand-charcoal mb-4">
+                  <h3 className="mb-3 font-heading text-3xl font-bold text-brand-charcoal md:mb-4 md:text-5xl">
                     {series.name}
                   </h3>
                   
-                  <p className={`mb-7 max-w-lg text-base leading-relaxed text-slate-600 transition-all duration-500 md:text-lg ${series.cinematic ? "line-clamp-3" : "line-clamp-3 group-hover:line-clamp-none"}`}>
+                  <p className={`mb-5 max-w-lg text-sm leading-relaxed text-slate-600 transition-all duration-500 sm:text-base md:mb-7 md:text-lg ${series.cinematic ? "line-clamp-3" : "line-clamp-3 group-hover:line-clamp-none"}`}>
                     {series.desc}
                   </p>
 
-                  <div className={`mb-8 opacity-0 transition-opacity delay-100 duration-500 group-hover:opacity-100 ${series.cinematic ? "flex max-w-md flex-wrap gap-2.5" : "grid grid-cols-2 gap-4"}`}>
+                  <div className={`mb-0 max-h-0 overflow-hidden opacity-0 transition-all delay-100 duration-500 group-hover:max-h-40 group-hover:opacity-100 md:mb-8 md:max-h-none ${series.cinematic ? "flex max-w-md flex-wrap gap-2.5" : "grid grid-cols-2 gap-4"}`}>
                     {series.features.map((feat, i) => (
                       <div key={i} className={`flex items-center gap-3 ${series.cinematic ? "rounded-full border border-slate-200/80 bg-white/72 px-3 py-2 shadow-sm backdrop-blur-xl" : ""}`}>
                         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-charcoal/7 backdrop-blur-md">
@@ -268,10 +268,10 @@ export default function PopularProducts() {
 
                   <Link
                     href={series.detailHref ?? "/iletisim"}
-                    className="pointer-events-auto inline-flex items-center gap-3 text-brand-charcoal font-semibold transition-colors hover:text-brand-gold group/link"
+                    className="group/link pointer-events-auto inline-flex w-fit items-center gap-2.5 rounded-full border border-brand-charcoal/10 bg-white/70 px-4 py-2.5 text-sm font-semibold text-brand-charcoal shadow-lg shadow-brand-charcoal/8 backdrop-blur-xl transition-all hover:border-brand-gold/35 hover:bg-white hover:text-brand-gold md:gap-3 md:border-transparent md:bg-transparent md:px-0 md:py-0 md:text-base md:shadow-none md:backdrop-blur-0"
                   >
                     Detaylı Bilgi İste
-                    <ArrowRight size={18} className="group-hover/link:translate-x-1 transition-transform" />
+                    <ArrowRight size={18} className="transition-transform group-hover/link:translate-x-1" />
                   </Link>
 
                 </div>
