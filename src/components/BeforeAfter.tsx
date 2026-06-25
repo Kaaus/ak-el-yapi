@@ -91,9 +91,6 @@ export default function BeforeAfter() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-brand-gold/16" />
-              <div className="absolute right-3 top-3 z-10 max-w-[calc(50%-0.75rem)] rounded-full bg-brand-gold/90 px-3 py-1.5 text-[10px] font-bold leading-tight text-white shadow-lg backdrop-blur-md sm:right-5 sm:top-5 sm:max-w-[16rem] sm:px-5 sm:py-2 sm:text-xs md:text-sm">
-                Sonra: Gün ışığı ve premium Pimapen
-              </div>
             </div>
 
             <div
@@ -109,8 +106,14 @@ export default function BeforeAfter() {
                 className="object-cover grayscale-[0.2] sepia-[0.25]"
               />
               <div className="absolute inset-0 bg-brand-charcoal/38" />
-              <div className="absolute left-3 top-3 z-10 max-w-[calc(50%-0.75rem)] rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold leading-tight text-brand-charcoal shadow-lg backdrop-blur-md sm:left-5 sm:top-5 sm:max-w-[16rem] sm:px-5 sm:py-2 sm:text-xs md:text-sm">
+            </div>
+
+            <div className="pointer-events-none absolute inset-x-3 top-3 z-40 flex items-start justify-between gap-3 sm:inset-x-5 sm:top-5">
+              <div className="max-w-[calc(50%-0.375rem)] rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold leading-tight text-brand-charcoal shadow-lg backdrop-blur-md sm:max-w-[16rem] sm:px-5 sm:py-2 sm:text-xs md:text-sm">
                 Önce: Eski doğrama ve soluk atmosfer
+              </div>
+              <div className="max-w-[calc(50%-0.375rem)] rounded-full bg-brand-gold/90 px-3 py-1.5 text-right text-[10px] font-bold leading-tight text-white shadow-lg backdrop-blur-md sm:max-w-[16rem] sm:px-5 sm:py-2 sm:text-xs md:text-sm">
+                Sonra: Gün ışığı ve premium Pimapen
               </div>
             </div>
 

@@ -109,11 +109,6 @@ export default function EnergySavingSection() {
               transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
               className="absolute bottom-28 right-6 h-40 w-[82%] rounded-full bg-gradient-to-r from-brand-gold/0 via-brand-gold/34 to-brand-gold/0 blur-2xl"
             />
-            <motion.div
-              animate={{ y: [0, -18, 0] }}
-              transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut" }}
-              className="absolute inset-x-12 top-1/3 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent"
-            />
           </motion.div>
 
           <div className="absolute bottom-4 left-4 right-4 rounded-[1.35rem] border border-white/25 bg-white/80 p-4 shadow-2xl backdrop-blur-2xl sm:bottom-6 sm:left-6 sm:right-6 sm:p-5 md:bottom-8 md:left-8 md:right-8 md:rounded-[1.5rem] md:p-6">
