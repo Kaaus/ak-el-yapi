@@ -213,7 +213,7 @@ export default function HeroWindowReveal() {
             </Link>
             <Link
               href="#donusum"
-              className="w-full rounded-full border border-white/35 bg-white/12 px-8 py-4 text-center font-bold text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/22 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:w-auto"
+              className="w-full rounded-full border border-white/35 bg-white/12 px-8 py-4 text-center font-bold text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/22 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:w-auto md:translate-x-[15.34px]"
             >
               Dönüşümü İzle
             </Link>
