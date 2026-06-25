@@ -19,6 +19,8 @@ const pimapenSeries = [
     ],
     image: "/images/nirvana-360.webp",
     imageMode: "contain",
+    imageFrameClassName:
+      "absolute left-[18%] right-[-22%] top-5 h-[270px] transition-all duration-[1600ms] ease-out group-hover:translate-x-4 group-hover:scale-[1.04] group-hover:opacity-35 sm:h-[305px] md:-bottom-10 md:-right-32 md:-top-8 md:left-[22%] md:h-auto md:scale-100 md:group-hover:scale-[1.08]",
     detailHref: "/urunler/nirvana",
     cinematic: {
       photo: "/images/nirvana-profile-detail.webp",
@@ -40,7 +42,7 @@ const pimapenSeries = [
     image: "/images/nirvana-360.webp",
     imageMode: "contain",
     imageFrameClassName:
-      "absolute -bottom-12 -right-16 top-14 left-[24%] transition-all duration-[1600ms] ease-out group-hover:translate-x-3 group-hover:scale-[1.04] group-hover:opacity-35 md:-right-20 md:left-[26%]",
+      "absolute left-[24%] right-[-18%] top-7 h-[255px] transition-all duration-[1600ms] ease-out group-hover:translate-x-3 group-hover:scale-[1.03] group-hover:opacity-35 sm:h-[295px] md:-bottom-12 md:-right-20 md:top-14 md:left-[26%] md:h-auto md:scale-100 md:group-hover:scale-[1.04]",
     detailHref: "/urunler/carisma",
     cinematic: {
       photo: "/images/nirvana-profile-detail.webp",
@@ -158,7 +160,7 @@ export default function PopularProducts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: idx * 0.1, duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-              className={`group relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/70 shadow-[0_28px_90px_rgba(30,34,41,0.13)] backdrop-blur-2xl ${series.detailHref ? "cursor-pointer" : ""} ${series.cinematic ? "h-[560px] md:h-[640px]" : "h-[500px] md:h-[600px]"}`}
+              className={`group relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/70 shadow-[0_28px_90px_rgba(30,34,41,0.13)] backdrop-blur-2xl ${series.detailHref ? "cursor-pointer" : ""} ${series.imageMode === "contain" ? "h-[500px] sm:h-[540px] md:h-[640px]" : series.cinematic ? "h-[560px] md:h-[640px]" : "h-[500px] md:h-[600px]"}`}
             >
               {/* Ultra High Quality Background Image */}
               <div className={`absolute inset-0 h-full w-full ${series.imageMode === "contain" ? "bg-[radial-gradient(circle_at_58%_22%,rgba(255,255,255,0.98),rgba(228,235,233,0.78)_38%,rgba(210,221,218,0.76)_76%)]" : "bg-white"}`}>
