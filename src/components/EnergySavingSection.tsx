@@ -16,8 +16,8 @@ export default function EnergySavingSection() {
     offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "-3%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.14, 1.09, 1.12]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-3%", "0%"]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.06, 1.08]);
   const heatOpacity = useTransform(scrollYProgress, [0.1, 0.42, 0.86], [0, 1, 0.42]);
   const cardY = useTransform(scrollYProgress, [0.12, 0.55], [48, 0]);
   const cardOpacity = useTransform(scrollYProgress, [0.12, 0.42], [0, 1]);
@@ -87,9 +87,9 @@ export default function EnergySavingSection() {
           style={{ y: cardY, opacity: cardOpacity }}
           className="relative min-h-[560px] overflow-hidden rounded-[2rem] bg-brand-charcoal shadow-[0_30px_100px_rgba(30,34,41,0.16)]"
         >
-          <motion.div style={{ y: imageY, scale: imageScale }} className="absolute -inset-y-10 inset-x-0 md:-inset-y-12">
+          <motion.div style={{ y: imageY, scale: imageScale }} className="absolute inset-0">
             <LazyVideo
-              className="h-full w-full object-cover [object-position:center_70%] md:[object-position:center_64%]"
+              className="h-full w-full object-cover [object-position:center_50%] md:[object-position:center_52%]"
               src={homeVideo}
               poster={homePoster}
               ariaLabel="Gün ışığı alan ferah ev ve premium pencere sistemi"
