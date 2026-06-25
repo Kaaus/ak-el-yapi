@@ -4,6 +4,7 @@ import { type CSSProperties, type MouseEvent, useEffect, useState } from "react"
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLenis } from "lenis/react";
 import { Clock3, Menu, Phone, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { siteConfig } from "@/lib/site";
@@ -56,6 +57,7 @@ const mixRgba = (from: Rgba, to: Rgba, amount: number) => {
 
 export default function Header() {
   const pathname = usePathname();
+  const lenis = useLenis();
   const [headerProgress, setHeaderProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -139,6 +141,14 @@ export default function Header() {
   const navHoverColor = useLightText ? "hover:text-white" : "hover:text-brand-charcoal";
   const quoteIsDark = progress < 0.3 || progress > 0.66;
 
+  const resetPageScroll = () => {
+    lenis?.scrollTo(0, { immediate: true, force: true });
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.scrollingElement?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.documentElement.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.body.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  };
+
   const handleNavLinkClick = (href: string, closeMobileMenu = false) => (event: MouseEvent<HTMLAnchorElement>) => {
     const targetPath = href.split("#")[0] || "/";
     const isSameRoute = pathname === targetPath;
@@ -152,9 +162,8 @@ export default function Header() {
     }
 
     event.preventDefault();
-    window.requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    resetPageScroll();
+    window.requestAnimationFrame(resetPageScroll);
   };
 
   return (
@@ -229,6 +238,7 @@ export default function Header() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
+                      scroll
                       onClick={handleNavLinkClick(link.href)}
                       className={`group relative rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 ${navHoverColor} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60`}
                       style={{ color: navTextColor }}
@@ -317,6 +327,7 @@ export default function Header() {
                   >
                     <Link
                       href={link.href}
+                      scroll
                       onClick={handleNavLinkClick(link.href, true)}
                       className="font-heading text-3xl font-medium text-white transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/60"
                     >
