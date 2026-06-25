@@ -28,7 +28,7 @@ export const siteConfig = {
     postalCode: process.env.NEXT_PUBLIC_ADDRESS_POSTAL_CODE ?? "34500",
     mapsUrl:
       process.env.NEXT_PUBLIC_MAPS_URL ??
-      "https://www.google.com/maps/search/?api=1&query=Yenikent%20Mahallesi%20604.%20Sokak%20No%3A%204%2F6%20D%C3%BCkkan%204%2C%20Esenyurt%20%2F%20%C4%B0stanbul%2C%20T%C3%BCrkiye%2034500",
+      "https://www.google.com/maps/search/?api=1&query=Yenikent%20Mahallesi%20604.%20Sokak%20No%3A%204%2F6%20D%C3%BCkkan%204%2C%20Esenyurt%20%C4%B0stanbul%20T%C3%BCrkiye%2034500",
   },
   social: {
     instagram:

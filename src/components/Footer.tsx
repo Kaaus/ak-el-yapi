@@ -80,7 +80,7 @@ export default function Footer() {
                   href={siteConfig.address.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="leading-relaxed transition-colors hover:text-brand-gold-light"
+                  className="leading-relaxed transition-colors hover:text-brand-gold-light hover:underline hover:underline-offset-4"
                 >
                   {siteConfig.address.full}
                 </a>

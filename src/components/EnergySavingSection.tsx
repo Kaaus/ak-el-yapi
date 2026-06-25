@@ -116,14 +116,14 @@ export default function EnergySavingSection() {
             />
           </motion.div>
 
-          <div className="absolute bottom-6 left-6 right-6 rounded-[1.5rem] border border-white/25 bg-white/78 p-6 shadow-2xl backdrop-blur-2xl md:bottom-8 md:left-8 md:right-8">
-            <div className="mb-4 flex items-center justify-between gap-4">
-              <div>
-                <div className="text-xs font-bold uppercase tracking-[0.24em] text-brand-gold">Isı katmanı</div>
-                <div className="mt-1 font-heading text-2xl font-bold text-brand-charcoal">Sıcaklık içeride kalır</div>
+          <div className="absolute bottom-4 left-4 right-4 rounded-[1.35rem] border border-white/25 bg-white/80 p-4 shadow-2xl backdrop-blur-2xl sm:bottom-6 sm:left-6 sm:right-6 sm:p-5 md:bottom-8 md:left-8 md:right-8 md:rounded-[1.5rem] md:p-6">
+            <div className="mb-4 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 sm:gap-4">
+              <div className="min-w-0">
+                <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-brand-gold sm:text-xs sm:tracking-[0.24em]">Isı katmanı</div>
+                <div className="mt-1 text-balance font-heading text-xl font-bold leading-tight text-brand-charcoal sm:text-2xl">Sıcaklık içeride kalır</div>
               </div>
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-charcoal text-brand-gold-light">
-                <ThermometerSun size={28} />
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-charcoal text-brand-gold-light sm:h-14 sm:w-14">
+                <ThermometerSun size={24} className="sm:h-7 sm:w-7" />
               </div>
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-brand-gray">

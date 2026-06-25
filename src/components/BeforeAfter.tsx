@@ -65,7 +65,7 @@ export default function BeforeAfter() {
             aria-valuemax={100}
             aria-valuenow={Math.round(sliderPosition)}
             tabIndex={0}
-            className="relative h-[420px] w-full touch-none select-none overflow-hidden rounded-[2rem] bg-brand-charcoal shadow-[0_24px_70px_rgba(30,34,41,0.18)] md:h-[620px]"
+            className="relative isolate h-[420px] w-full touch-none select-none overflow-hidden rounded-[1.5rem] bg-brand-charcoal shadow-[0_24px_70px_rgba(30,34,41,0.18)] md:h-[620px] md:rounded-[2rem]"
             onPointerDown={(event) => {
               setIsDragging(true);
               event.currentTarget.setPointerCapture(event.pointerId);
@@ -91,7 +91,7 @@ export default function BeforeAfter() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-brand-gold/16" />
-              <div className="absolute right-5 top-5 z-10 rounded-full bg-brand-gold/90 px-5 py-2 text-xs font-bold text-white shadow-lg backdrop-blur-md md:text-sm">
+              <div className="absolute right-3 top-3 z-10 max-w-[calc(50%-0.75rem)] rounded-full bg-brand-gold/90 px-3 py-1.5 text-[10px] font-bold leading-tight text-white shadow-lg backdrop-blur-md sm:right-5 sm:top-5 sm:max-w-[16rem] sm:px-5 sm:py-2 sm:text-xs md:text-sm">
                 Sonra: Gün ışığı ve premium Pimapen
               </div>
             </div>
@@ -109,7 +109,7 @@ export default function BeforeAfter() {
                 className="object-cover grayscale-[0.2] sepia-[0.25]"
               />
               <div className="absolute inset-0 bg-brand-charcoal/38" />
-              <div className="absolute left-5 top-5 z-10 rounded-full bg-white/90 px-5 py-2 text-xs font-bold text-brand-charcoal shadow-lg backdrop-blur-md md:text-sm">
+              <div className="absolute left-3 top-3 z-10 max-w-[calc(50%-0.75rem)] rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold leading-tight text-brand-charcoal shadow-lg backdrop-blur-md sm:left-5 sm:top-5 sm:max-w-[16rem] sm:px-5 sm:py-2 sm:text-xs md:text-sm">
                 Önce: Eski doğrama ve soluk atmosfer
               </div>
             </div>
@@ -120,15 +120,15 @@ export default function BeforeAfter() {
             />
 
             <div
-              className="pointer-events-none absolute top-1/2 z-30 flex h-16 w-16 items-center justify-center rounded-full border border-white/60 bg-white/92 text-brand-charcoal shadow-[0_0_34px_rgba(0,0,0,0.28)] backdrop-blur-xl"
+              className="pointer-events-none absolute top-1/2 z-30 flex h-12 w-12 items-center justify-center rounded-full border border-white/60 bg-white/92 text-brand-charcoal shadow-[0_0_34px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:h-16 sm:w-16"
               style={{
                 left: `${sliderPosition}%`,
                 transform: `translate(-50%, -50%) ${isDragging ? "scale(1.08)" : "scale(1)"}`,
                 transition: "transform 0.2s ease-out",
               }}
             >
-              <ChevronLeft size={24} className="text-brand-charcoal/70" />
-              <ChevronRight size={24} className="text-brand-charcoal/70" />
+              <ChevronLeft size={20} className="text-brand-charcoal/70 sm:h-6 sm:w-6" />
+              <ChevronRight size={20} className="text-brand-charcoal/70 sm:h-6 sm:w-6" />
             </div>
           </div>
         </motion.div>

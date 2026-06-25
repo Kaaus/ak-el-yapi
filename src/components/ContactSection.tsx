@@ -138,9 +138,14 @@ export default function ContactSection() {
                 <MapPin size={24} />
               </div>
               <h3 className="mb-2 font-heading text-lg font-bold text-brand-charcoal">Adres</h3>
-              <p className="text-brand-charcoal/78 leading-relaxed">
+              <a
+                href={siteConfig.address.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block leading-relaxed text-brand-charcoal/78 transition-colors hover:text-brand-gold hover:underline hover:underline-offset-4"
+              >
                 {siteConfig.address.full}
-              </p>
+              </a>
               <a
                 href={siteConfig.address.mapsUrl}
                 target="_blank"
