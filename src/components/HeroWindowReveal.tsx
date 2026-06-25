@@ -203,11 +203,11 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.95, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: actionsOpacity }}
-            className="flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row md:-translate-x-3"
+            className="flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row"
           >
             <Link
               href="#iletisim"
-              className="w-full rounded-full bg-white px-8 py-4 text-center font-bold text-brand-charcoal shadow-2xl shadow-white/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 sm:w-auto"
+              className="w-full rounded-full bg-white px-8 py-4 text-center font-bold text-brand-charcoal shadow-2xl shadow-white/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 sm:w-auto md:-translate-x-11"
             >
               Ücretsiz Keşif Talep Et
             </Link>
