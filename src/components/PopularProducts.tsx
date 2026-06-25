@@ -25,8 +25,9 @@ const pimapenSeries = [
     cinematic: {
       photo: "/images/nirvana-profile-detail.webp",
       video: "/videos/nirvana.mp4",
-      poster: "/images/nirvana-showcase-poster.webp",
+      poster: "/images/nirvana-360.webp",
       spin: "/images/nirvana-360.webp",
+      preloadOnIdle: true,
     },
   },
   {
@@ -47,8 +48,9 @@ const pimapenSeries = [
     cinematic: {
       photo: "/images/nirvana-profile-detail.webp",
       video: "/videos/nirvana.mp4",
-      poster: "/images/nirvana-showcase-poster.webp",
-      spin: "/images/carisma-series.webp",
+      poster: "/images/nirvana-360.webp",
+      spin: "/images/nirvana-360.webp",
+      preloadOnIdle: true,
     },
   },
   {
@@ -198,6 +200,7 @@ export default function PopularProducts() {
                     className="h-full w-full scale-105 object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-100"
                     ariaLabel={`${series.name} ürün animasyonu`}
                     active={activeSeries === series.id}
+                    preloadOnIdle={series.cinematic.preloadOnIdle}
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/50 to-white/10" />
                   <div className="absolute inset-0 bg-gradient-to-t from-white/94 via-white/16 to-white/36" />
@@ -292,12 +295,14 @@ function ProductHoverVideo({
   ariaLabel,
   className,
   poster,
+  preloadOnIdle = false,
   src,
 }: {
   active: boolean;
   ariaLabel: string;
   className?: string;
   poster: string;
+  preloadOnIdle?: boolean;
   src: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -328,11 +333,11 @@ function ProductHoverVideo({
       muted
       loop
       playsInline
-      preload="none"
+      preload={preloadOnIdle ? "auto" : "none"}
       poster={poster}
       aria-label={ariaLabel}
     >
-      {active ? <source src={src} type="video/mp4" /> : null}
+      {active || preloadOnIdle ? <source src={src} type="video/mp4" /> : null}
     </video>
   );
 }
