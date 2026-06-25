@@ -16,10 +16,19 @@ export const siteConfig = {
   },
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@akelyapi.com.tr",
   address: {
-    street: process.env.NEXT_PUBLIC_ADDRESS_STREET ?? "Örnek Mahallesi, Yapı Caddesi, No: 1",
-    district: process.env.NEXT_PUBLIC_ADDRESS_DISTRICT ?? "Bostancı",
+    full:
+      process.env.NEXT_PUBLIC_ADDRESS_FULL ??
+      "Yenikent Mahallesi 604. Sokak No: 4/6 Dükkan 4, Esenyurt / İstanbul, Türkiye 34500",
+    street:
+      process.env.NEXT_PUBLIC_ADDRESS_STREET ??
+      "Yenikent Mahallesi 604. Sokak No: 4/6 Dükkan 4",
+    district: process.env.NEXT_PUBLIC_ADDRESS_DISTRICT ?? "Esenyurt",
     city: process.env.NEXT_PUBLIC_ADDRESS_CITY ?? "İstanbul",
-    country: process.env.NEXT_PUBLIC_ADDRESS_COUNTRY ?? "TR",
+    country: process.env.NEXT_PUBLIC_ADDRESS_COUNTRY ?? "Türkiye",
+    postalCode: process.env.NEXT_PUBLIC_ADDRESS_POSTAL_CODE ?? "34500",
+    mapsUrl:
+      process.env.NEXT_PUBLIC_MAPS_URL ??
+      "https://www.google.com/maps/search/?api=1&query=Yenikent%20Mahallesi%20604.%20Sokak%20No%3A%204%2F6%20D%C3%BCkkan%204%2C%20Esenyurt%20%2F%20%C4%B0stanbul%2C%20T%C3%BCrkiye%2034500",
   },
   social: {
     instagram:

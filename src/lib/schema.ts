@@ -14,10 +14,13 @@ export function localBusinessJsonLd() {
     address: {
       "@type": "PostalAddress",
       streetAddress: siteConfig.address.street,
-      addressLocality: `${siteConfig.address.district}, ${siteConfig.address.city}`,
+      addressLocality: siteConfig.address.district,
+      addressRegion: siteConfig.address.city,
+      postalCode: siteConfig.address.postalCode,
       addressCountry: siteConfig.address.country,
     },
-    areaServed: ["İstanbul", "Kadıköy", "Bostancı", "Ataşehir", "Maltepe"],
+    hasMap: siteConfig.address.mapsUrl,
+    areaServed: ["İstanbul", "Esenyurt", "Beylikdüzü", "Avcılar", "Büyükçekmece"],
     sameAs: [siteConfig.social.instagram, siteConfig.social.facebook],
     makesOffer: [
       "Pimapen pencere sistemleri",

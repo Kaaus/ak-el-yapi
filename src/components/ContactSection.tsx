@@ -138,11 +138,17 @@ export default function ContactSection() {
                 <MapPin size={24} />
               </div>
               <h3 className="mb-2 font-heading text-lg font-bold text-brand-charcoal">Adres</h3>
-              <p className="text-brand-charcoal/78">
-                {siteConfig.address.street}
-                <br />
-                {siteConfig.address.district} / {siteConfig.address.city}
+              <p className="text-brand-charcoal/78 leading-relaxed">
+                {siteConfig.address.full}
               </p>
+              <a
+                href={siteConfig.address.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex text-sm font-semibold text-brand-gold transition-colors hover:text-brand-charcoal"
+              >
+                Haritada Gör
+              </a>
             </div>
           </motion.div>
 
