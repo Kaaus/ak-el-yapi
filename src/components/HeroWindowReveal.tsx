@@ -112,10 +112,10 @@ export default function HeroWindowReveal() {
         >
           <motion.div
             style={{
-              borderRadius: compactViewport ? 22 : frameRadius,
-              borderWidth: compactViewport ? 6 : frameBorderWidth,
+              borderRadius: compactViewport ? 20 : frameRadius,
+              borderWidth: compactViewport ? 5 : frameBorderWidth,
             }}
-            className="relative flex h-[calc(100svh-7rem)] w-[calc(100vw-1rem)] overflow-hidden border-white/90 bg-white/[0.04] shadow-[0_20px_60px_rgba(15,20,25,0.18),_inset_0_0_32px_rgba(0,0,0,0.2)] md:h-[70vh] md:w-[50vw] md:border-white/95 md:bg-white/8 md:shadow-[0_24px_80px_rgba(15,20,25,0.22),_inset_0_0_42px_rgba(0,0,0,0.34)]"
+            className="relative flex h-[calc(100svh-8rem)] w-[calc(100vw-2rem)] overflow-hidden border-white/90 bg-white/[0.04] shadow-[0_20px_60px_rgba(15,20,25,0.18),_inset_0_0_32px_rgba(0,0,0,0.2)] md:h-[70vh] md:w-[50vw] md:border-white/95 md:bg-white/8 md:shadow-[0_24px_80px_rgba(15,20,25,0.22),_inset_0_0_42px_rgba(0,0,0,0.34)]"
           >
             <div className="absolute inset-0 z-30 rounded-[inherit] ring-1 ring-black/10" />
 
@@ -156,15 +156,18 @@ export default function HeroWindowReveal() {
             </motion.div>
 
             <motion.div
-              style={{ width: centerBarWidth, opacity: compactViewport ? 0 : centerBarOpacity }}
-              className="absolute bottom-0 left-1/2 top-0 z-40 hidden -translate-x-1/2 bg-white/92 shadow-[0_0_18px_rgba(0,0,0,0.22)] md:block"
+              style={{
+                width: compactViewport ? 2 : centerBarWidth,
+                opacity: compactViewport ? 0.2 : centerBarOpacity,
+              }}
+              className="absolute bottom-0 left-1/2 top-0 z-40 block -translate-x-1/2 bg-white/50 md:bg-white/92 md:shadow-[0_0_18px_rgba(0,0,0,0.22)]"
             />
           </motion.div>
         </motion.div>
 
         <motion.div
           style={{ y: textY, scale: textScale, filter: textBlur }}
-          className="relative z-30 mt-0 flex w-full max-w-[22rem] flex-col items-center justify-start gap-4 px-5 text-center md:mt-20 md:max-w-5xl md:justify-center md:gap-0 md:px-6"
+          className="relative z-30 mt-0 flex w-full max-w-[19rem] flex-col items-center justify-start gap-3.5 px-5 text-center md:mt-20 md:max-w-5xl md:justify-center md:gap-0 md:px-6"
         >
           <motion.div
             initial={false}
@@ -181,7 +184,7 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.45, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: titleOpacity }}
-            className="text-balance font-heading text-[clamp(2.1rem,11vw,2.45rem)] font-bold leading-[1.02] tracking-tight text-white drop-shadow-[0_18px_45px_rgba(0,0,0,0.38)] sm:text-5xl md:text-7xl md:leading-[1.04] lg:text-8xl"
+            className="text-balance font-heading text-[clamp(1.95rem,9.8vw,2.2rem)] font-bold leading-[1.05] tracking-tight text-white drop-shadow-[0_18px_45px_rgba(0,0,0,0.38)] md:text-7xl md:leading-[1.04] lg:text-8xl"
           >
             Eviniz <br className="md:hidden" />
             Ferahlığa <br />
@@ -193,7 +196,7 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.72, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: paragraphOpacity }}
-            className="mx-auto max-w-[21rem] text-sm font-medium leading-[1.55] text-white/86 drop-shadow-md md:mb-10 md:mt-7 md:max-w-2xl md:text-xl md:leading-relaxed"
+            className="mx-auto max-w-[18rem] text-[13px] font-medium leading-5 text-white/86 drop-shadow-md md:mb-10 md:mt-7 md:max-w-2xl md:text-xl md:leading-relaxed"
           >
             AK-EL Yapı, yalıtımlı Pimapen sistemlerini temiz işçilik, sessiz mekanlar ve gün ışığı hissiyle buluşturur.
           </motion.p>
@@ -203,17 +206,17 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.95, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: actionsOpacity }}
-            className="flex w-full max-w-[20rem] flex-col items-center justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row md:-translate-x-9 md:gap-12"
+            className="flex w-full max-w-[17.5rem] flex-col items-center justify-center gap-2.5 md:w-auto md:max-w-none md:-translate-x-9 md:flex-row md:gap-12"
           >
             <Link
               href="#iletisim"
-              className="w-full rounded-full bg-white px-7 py-3.5 text-center font-bold text-brand-charcoal shadow-2xl shadow-white/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 sm:w-auto md:px-8 md:py-4"
+              className="w-full rounded-full bg-white px-5 py-3 text-center text-sm font-bold leading-5 text-brand-charcoal shadow-2xl shadow-white/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 md:w-auto md:px-8 md:py-4 md:text-base"
             >
               Ücretsiz Keşif Talep Et
             </Link>
             <Link
               href="#donusum"
-              className="w-full rounded-full border border-white/35 bg-white/12 px-7 py-3.5 text-center font-bold text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/22 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:w-auto md:translate-x-[15.34px] md:px-8 md:py-4"
+              className="w-full rounded-full border border-white/35 bg-white/12 px-5 py-3 text-center text-sm font-bold leading-5 text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/22 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 md:w-auto md:translate-x-[15.34px] md:px-8 md:py-4 md:text-base"
             >
               Dönüşümü İzle
             </Link>
