@@ -105,17 +105,17 @@ export default function HeroWindowReveal() {
 
         <motion.div
           style={{
-            scale: shouldReduceMotion ? 1 : frameScale,
-            opacity: shouldReduceMotion ? 0.82 : frameOpacity,
+            scale: compactViewport || shouldReduceMotion ? 1 : frameScale,
+            opacity: compactViewport ? 0.92 : shouldReduceMotion ? 0.82 : frameOpacity,
           }}
-          className="pointer-events-none absolute inset-0 z-20 hidden origin-center items-center justify-center will-change-transform md:flex"
+          className="pointer-events-none absolute inset-0 z-20 flex origin-center items-center justify-center pt-16 will-change-transform md:pt-0"
         >
           <motion.div
             style={{
-              borderRadius: frameRadius,
-              borderWidth: frameBorderWidth,
+              borderRadius: compactViewport ? 22 : frameRadius,
+              borderWidth: compactViewport ? 6 : frameBorderWidth,
             }}
-            className="relative flex h-[58svh] w-[74vw] overflow-hidden border-white/95 bg-white/8 shadow-[0_24px_80px_rgba(15,20,25,0.22),_inset_0_0_42px_rgba(0,0,0,0.34)] md:h-[70vh] md:w-[50vw]"
+            className="relative flex h-[calc(100svh-7rem)] w-[calc(100vw-1rem)] overflow-hidden border-white/90 bg-white/[0.04] shadow-[0_20px_60px_rgba(15,20,25,0.18),_inset_0_0_32px_rgba(0,0,0,0.2)] md:h-[70vh] md:w-[50vw] md:border-white/95 md:bg-white/8 md:shadow-[0_24px_80px_rgba(15,20,25,0.22),_inset_0_0_42px_rgba(0,0,0,0.34)]"
           >
             <div className="absolute inset-0 z-30 rounded-[inherit] ring-1 ring-black/10" />
 
@@ -123,10 +123,10 @@ export default function HeroWindowReveal() {
               style={{
                 x: shouldReduceMotion ? 0 : leftPanelX,
                 rotateY: shouldReduceMotion || compactViewport ? 0 : leftPanelRotate,
-                opacity: shouldReduceMotion ? 0.55 : panelOpacity,
+                opacity: compactViewport ? 0.28 : shouldReduceMotion ? 0.55 : panelOpacity,
                 transformPerspective: 1400,
               }}
-              className="relative h-full w-1/2 origin-left overflow-hidden border-r border-white/62 bg-white/14 backdrop-blur-[2px] will-change-transform"
+              className="relative h-full w-1/2 origin-left overflow-hidden border-r-0 bg-white/8 backdrop-blur-[1px] will-change-transform md:border-r md:border-white/62 md:bg-white/14 md:backdrop-blur-[2px]"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-white/24 via-white/6 to-transparent" />
               <motion.div
@@ -141,10 +141,10 @@ export default function HeroWindowReveal() {
               style={{
                 x: shouldReduceMotion ? 0 : rightPanelX,
                 rotateY: shouldReduceMotion || compactViewport ? 0 : rightPanelRotate,
-                opacity: shouldReduceMotion ? 0.55 : panelOpacity,
+                opacity: compactViewport ? 0.28 : shouldReduceMotion ? 0.55 : panelOpacity,
                 transformPerspective: 1400,
               }}
-              className="relative h-full w-1/2 origin-right overflow-hidden border-l border-white/62 bg-white/14 backdrop-blur-[2px] will-change-transform"
+              className="relative h-full w-1/2 origin-right overflow-hidden border-l-0 bg-white/8 backdrop-blur-[1px] will-change-transform md:border-l md:border-white/62 md:bg-white/14 md:backdrop-blur-[2px]"
             >
               <div className="absolute inset-0 bg-gradient-to-tl from-white/24 via-white/6 to-transparent" />
               <motion.div
