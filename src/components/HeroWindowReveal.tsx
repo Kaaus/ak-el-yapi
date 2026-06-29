@@ -78,7 +78,7 @@ export default function HeroWindowReveal() {
 
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-brand-charcoal" id="hero">
-      <div className="sticky left-0 top-0 flex h-screen min-h-[100svh] w-full items-center justify-center overflow-hidden">
+      <div className="sticky left-0 top-0 flex h-screen min-h-[100svh] w-full items-start justify-center overflow-hidden pb-28 pt-32 md:items-center md:pb-0 md:pt-0">
         <motion.div style={backgroundMotionStyle} className="absolute inset-0 will-change-transform">
           <Image
             src={forestImage}
@@ -157,21 +157,21 @@ export default function HeroWindowReveal() {
 
             <motion.div
               style={{ width: centerBarWidth, opacity: compactViewport ? 0 : centerBarOpacity }}
-              className="absolute bottom-0 left-1/2 top-0 z-40 -translate-x-1/2 bg-white/92 shadow-[0_0_18px_rgba(0,0,0,0.22)]"
+              className="absolute bottom-0 left-1/2 top-0 z-40 hidden -translate-x-1/2 bg-white/92 shadow-[0_0_18px_rgba(0,0,0,0.22)] md:block"
             />
           </motion.div>
         </motion.div>
 
         <motion.div
           style={{ y: textY, scale: textScale, filter: textBlur }}
-          className="relative z-30 mt-12 flex max-w-5xl flex-col items-center justify-center px-6 text-center md:mt-20"
+          className="relative z-30 mt-0 flex w-full max-w-[22rem] flex-col items-center justify-start px-5 text-center md:mt-20 md:max-w-5xl md:justify-center md:px-6"
         >
           <motion.div
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 2.15, ease: "easeOut" }}
             style={{ opacity: labelOpacity }}
-            className="mb-5 rounded-full border border-white/35 bg-white/18 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.34em] text-white shadow-2xl backdrop-blur-xl"
+            className="mb-4 max-w-[18rem] rounded-full border border-white/35 bg-white/18 px-3 py-1.5 text-[9px] font-bold uppercase leading-relaxed tracking-[0.2em] text-white shadow-2xl backdrop-blur-xl md:mb-5 md:max-w-none md:px-4 md:py-2 md:text-[10px] md:tracking-[0.34em]"
           >
             Ferahlığa açılan premium sistemler
           </motion.div>
@@ -181,7 +181,7 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.45, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: titleOpacity }}
-            className="text-balance font-heading text-4xl font-bold leading-[1.04] tracking-tight text-white drop-shadow-[0_18px_45px_rgba(0,0,0,0.38)] sm:text-5xl md:text-7xl lg:text-8xl"
+            className="text-balance font-heading text-[2.45rem] font-bold leading-[1.02] tracking-tight text-white drop-shadow-[0_18px_45px_rgba(0,0,0,0.38)] sm:text-5xl md:text-7xl md:leading-[1.04] lg:text-8xl"
           >
             Eviniz <br className="md:hidden" />
             Ferahlığa <br />
@@ -193,7 +193,7 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.72, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: paragraphOpacity }}
-            className="mx-auto mb-10 mt-7 max-w-2xl text-lg font-medium leading-relaxed text-white/86 drop-shadow-md md:text-xl"
+            className="mx-auto mb-7 mt-5 max-w-[21rem] text-[0.95rem] font-medium leading-6 text-white/86 drop-shadow-md md:mb-10 md:mt-7 md:max-w-2xl md:text-xl md:leading-relaxed"
           >
             AK-EL Yapı, yalıtımlı Pimapen sistemlerini temiz işçilik, sessiz mekanlar ve gün ışığı hissiyle buluşturur.
           </motion.p>
@@ -203,17 +203,17 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.95, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: actionsOpacity }}
-            className="flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row md:-translate-x-9 md:gap-12"
+            className="flex w-full max-w-[20rem] flex-col items-center justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row md:-translate-x-9 md:gap-12"
           >
             <Link
               href="#iletisim"
-              className="w-full rounded-full bg-white px-8 py-4 text-center font-bold text-brand-charcoal shadow-2xl shadow-white/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 sm:w-auto"
+              className="w-full rounded-full bg-white px-7 py-3.5 text-center font-bold text-brand-charcoal shadow-2xl shadow-white/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 sm:w-auto md:px-8 md:py-4"
             >
               Ücretsiz Keşif Talep Et
             </Link>
             <Link
               href="#donusum"
-              className="w-full rounded-full border border-white/35 bg-white/12 px-8 py-4 text-center font-bold text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/22 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:w-auto md:translate-x-[15.34px]"
+              className="w-full rounded-full border border-white/35 bg-white/12 px-7 py-3.5 text-center font-bold text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/22 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:w-auto md:translate-x-[15.34px] md:px-8 md:py-4"
             >
               Dönüşümü İzle
             </Link>
@@ -222,9 +222,9 @@ export default function HeroWindowReveal() {
 
         <motion.div
           style={{ opacity: scrollPromptOpacity }}
-          className="absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-2"
+          className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-1.5 md:bottom-8 md:gap-2"
         >
-          <span className="rounded-full border border-white/30 bg-white/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-white/85 backdrop-blur-md">
+          <span className="max-w-[18rem] rounded-full border border-white/30 bg-white/20 px-2.5 py-1 text-center text-[9px] font-bold uppercase leading-relaxed tracking-[0.2em] text-white/85 backdrop-blur-md md:max-w-none md:px-3 md:text-[10px] md:tracking-[0.3em]">
             Işığın içeri girişini hisset
           </span>
           <motion.div
