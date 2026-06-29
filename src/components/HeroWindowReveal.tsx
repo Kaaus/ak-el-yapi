@@ -78,7 +78,7 @@ export default function HeroWindowReveal() {
 
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-brand-charcoal" id="hero">
-      <div className="sticky left-0 top-0 flex h-screen min-h-[100svh] w-full items-start justify-center overflow-hidden pb-28 pt-32 md:items-center md:pb-0 md:pt-0">
+      <div className="sticky left-0 top-0 flex h-[100svh] min-h-[100svh] w-full items-start justify-center overflow-hidden pb-6 pt-28 md:h-screen md:items-center md:pb-0 md:pt-0">
         <motion.div style={backgroundMotionStyle} className="absolute inset-0 will-change-transform">
           <Image
             src={forestImage}
@@ -108,7 +108,7 @@ export default function HeroWindowReveal() {
             scale: shouldReduceMotion ? 1 : frameScale,
             opacity: shouldReduceMotion ? 0.82 : frameOpacity,
           }}
-          className="pointer-events-none absolute inset-0 z-20 flex origin-center items-center justify-center will-change-transform"
+          className="pointer-events-none absolute inset-0 z-20 hidden origin-center items-center justify-center will-change-transform md:flex"
         >
           <motion.div
             style={{
@@ -164,14 +164,14 @@ export default function HeroWindowReveal() {
 
         <motion.div
           style={{ y: textY, scale: textScale, filter: textBlur }}
-          className="relative z-30 mt-0 flex w-full max-w-[22rem] flex-col items-center justify-start px-5 text-center md:mt-20 md:max-w-5xl md:justify-center md:px-6"
+          className="relative z-30 mt-0 flex w-full max-w-[22rem] flex-col items-center justify-start gap-4 px-5 text-center md:mt-20 md:max-w-5xl md:justify-center md:gap-0 md:px-6"
         >
           <motion.div
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 2.15, ease: "easeOut" }}
             style={{ opacity: labelOpacity }}
-            className="mb-4 max-w-[18rem] rounded-full border border-white/35 bg-white/18 px-3 py-1.5 text-[9px] font-bold uppercase leading-relaxed tracking-[0.2em] text-white shadow-2xl backdrop-blur-xl md:mb-5 md:max-w-none md:px-4 md:py-2 md:text-[10px] md:tracking-[0.34em]"
+            className="max-w-[18rem] rounded-full border border-white/35 bg-white/18 px-3 py-1.5 text-[9px] font-bold uppercase leading-relaxed tracking-[0.2em] text-white shadow-2xl backdrop-blur-xl md:mb-5 md:max-w-none md:px-4 md:py-2 md:text-[10px] md:tracking-[0.34em]"
           >
             Ferahlığa açılan premium sistemler
           </motion.div>
@@ -181,7 +181,7 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.45, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: titleOpacity }}
-            className="text-balance font-heading text-[2.45rem] font-bold leading-[1.02] tracking-tight text-white drop-shadow-[0_18px_45px_rgba(0,0,0,0.38)] sm:text-5xl md:text-7xl md:leading-[1.04] lg:text-8xl"
+            className="text-balance font-heading text-[clamp(2.1rem,11vw,2.45rem)] font-bold leading-[1.02] tracking-tight text-white drop-shadow-[0_18px_45px_rgba(0,0,0,0.38)] sm:text-5xl md:text-7xl md:leading-[1.04] lg:text-8xl"
           >
             Eviniz <br className="md:hidden" />
             Ferahlığa <br />
@@ -193,7 +193,7 @@ export default function HeroWindowReveal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, delay: 2.72, ease: [0.19, 1, 0.22, 1] }}
             style={{ opacity: paragraphOpacity }}
-            className="mx-auto mb-7 mt-5 max-w-[21rem] text-[0.95rem] font-medium leading-6 text-white/86 drop-shadow-md md:mb-10 md:mt-7 md:max-w-2xl md:text-xl md:leading-relaxed"
+            className="mx-auto max-w-[21rem] text-sm font-medium leading-[1.55] text-white/86 drop-shadow-md md:mb-10 md:mt-7 md:max-w-2xl md:text-xl md:leading-relaxed"
           >
             AK-EL Yapı, yalıtımlı Pimapen sistemlerini temiz işçilik, sessiz mekanlar ve gün ışığı hissiyle buluşturur.
           </motion.p>
@@ -218,11 +218,25 @@ export default function HeroWindowReveal() {
               Dönüşümü İzle
             </Link>
           </motion.div>
+
+          <motion.div
+            style={{ opacity: scrollPromptOpacity }}
+            className="mt-1 flex flex-col items-center gap-1.5 md:hidden"
+          >
+            <span className="max-w-[18rem] rounded-full border border-white/30 bg-white/20 px-2.5 py-1 text-center text-[9px] font-bold uppercase leading-relaxed tracking-[0.2em] text-white/85 backdrop-blur-md">
+              Işığın içeri girişini hisset
+            </span>
+            <motion.div
+              animate={shouldReduceMotion ? { y: 0 } : { y: [0, 6, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="h-8 w-0.5 rounded-full bg-gradient-to-b from-white to-transparent"
+            />
+          </motion.div>
         </motion.div>
 
         <motion.div
           style={{ opacity: scrollPromptOpacity }}
-          className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-1.5 md:bottom-8 md:gap-2"
+          className="absolute bottom-8 left-1/2 z-30 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
         >
           <span className="max-w-[18rem] rounded-full border border-white/30 bg-white/20 px-2.5 py-1 text-center text-[9px] font-bold uppercase leading-relaxed tracking-[0.2em] text-white/85 backdrop-blur-md md:max-w-none md:px-3 md:text-[10px] md:tracking-[0.3em]">
             Işığın içeri girişini hisset
