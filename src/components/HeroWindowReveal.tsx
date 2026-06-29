@@ -113,7 +113,7 @@ export default function HeroWindowReveal() {
           <motion.div
             style={{
               borderRadius: compactViewport ? 20 : frameRadius,
-              borderWidth: compactViewport ? 5 : frameBorderWidth,
+              borderWidth: compactViewport ? 6 : frameBorderWidth,
             }}
             className="relative flex h-[calc(100svh-5rem)] w-[calc(100vw-2rem)] overflow-hidden border-white/90 bg-white/[0.04] shadow-[0_20px_60px_rgba(15,20,25,0.18),_inset_0_0_32px_rgba(0,0,0,0.2)] md:h-[70vh] md:w-[50vw] md:border-white/95 md:bg-white/8 md:shadow-[0_24px_80px_rgba(15,20,25,0.22),_inset_0_0_42px_rgba(0,0,0,0.34)]"
           >
@@ -157,10 +157,10 @@ export default function HeroWindowReveal() {
 
             <motion.div
               style={{
-                width: compactViewport ? 2.5 : centerBarWidth,
-                opacity: compactViewport ? 0.3 : centerBarOpacity,
+                width: compactViewport ? 3 : centerBarWidth,
+                opacity: compactViewport ? 0.36 : centerBarOpacity,
               }}
-              className="absolute bottom-0 left-1/2 top-0 z-40 block -translate-x-1/2 bg-white/60 md:bg-white/92 md:shadow-[0_0_18px_rgba(0,0,0,0.22)]"
+              className="absolute bottom-0 left-1/2 top-0 z-40 block -translate-x-1/2 bg-white/70 md:bg-white/92 md:shadow-[0_0_18px_rgba(0,0,0,0.22)]"
             />
           </motion.div>
         </motion.div>
