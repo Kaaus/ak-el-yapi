@@ -31,10 +31,25 @@ const serviceOptions = [
   "Ses yalıtımı",
 ];
 
+function normalizePhoneNumber(value: string) {
+  const digits = value.replace(/\D/g, "");
+
+  if (digits.length === 12 && digits.startsWith("90")) {
+    return `0${digits.slice(2)}`;
+  }
+
+  return digits;
+}
+
+function isValidTurkishMobilePhone(value: string) {
+  return /^05\d{9}$/.test(normalizePhoneNumber(value));
+}
+
 export default function ContactSection() {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [lastWhatsappUrl, setLastWhatsappUrl] = useState("");
+  const [phoneValidationAttempted, setPhoneValidationAttempted] = useState(false);
   const [form, setForm] = useState({
     propertyType: "",
     service: "",
@@ -43,17 +58,30 @@ export default function ContactSection() {
   });
 
   const progress = ((step + 1) / 4) * 100;
+  const phoneIsValid = isValidTurkishMobilePhone(form.phone);
+  const showPhoneError = step === 2 && phoneValidationAttempted && !phoneIsValid;
 
   const canContinue =
     (step === 0 && form.propertyType) ||
     (step === 1 && form.service) ||
-    (step === 2 && form.phone.trim().length >= 10) ||
+    (step === 2 && phoneIsValid) ||
     step === 3;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (step < 3) {
-      if (canContinue) setStep((current) => current + 1);
+      if (step === 2 && !phoneIsValid) {
+        setPhoneValidationAttempted(true);
+        return;
+      }
+
+      if (canContinue) {
+        if (step === 2) {
+          setForm((current) => ({ ...current, phone: normalizePhoneNumber(current.phone) }));
+          setPhoneValidationAttempted(false);
+        }
+        setStep((current) => current + 1);
+      }
       return;
     }
     const whatsappUrl = buildWhatsAppUrl(form);
@@ -187,6 +215,7 @@ export default function ContactSection() {
                       setSubmitted(false);
                       setStep(0);
                       setLastWhatsappUrl("");
+                      setPhoneValidationAttempted(false);
                       setForm({ propertyType: "", service: "", phone: "", message: "" });
                     }}
                     className="rounded-full bg-brand-charcoal px-7 py-3 font-semibold text-white transition-colors hover:bg-brand-gold hover:text-brand-charcoal"
@@ -211,7 +240,13 @@ export default function ContactSection() {
                   </div>
                 </div>
 
-                <AnimateStep step={step} form={form} setForm={setForm} />
+                <AnimateStep
+                  step={step}
+                  form={form}
+                  setForm={setForm}
+                  showPhoneError={showPhoneError}
+                  onPhoneBlur={() => setPhoneValidationAttempted(true)}
+                />
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-between">
                   <button
@@ -225,7 +260,7 @@ export default function ContactSection() {
                   </button>
                   <button
                     type="submit"
-                    disabled={!canContinue}
+                    disabled={step !== 2 && !canContinue}
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-charcoal px-6 py-3 font-semibold text-white shadow-xl transition-all hover:bg-brand-gold disabled:cursor-not-allowed disabled:opacity-45"
                   >
                     {step === 3 ? "Talebi hazırla" : "Devam et"}
@@ -265,10 +300,14 @@ function AnimateStep({
   step,
   form,
   setForm,
+  showPhoneError,
+  onPhoneBlur,
 }: {
   step: number;
   form: WizardForm;
   setForm: React.Dispatch<React.SetStateAction<WizardForm>>;
+  showPhoneError: boolean;
+  onPhoneBlur: () => void;
 }) {
   return (
     <motion.div
@@ -348,10 +387,21 @@ function AnimateStep({
             inputMode="tel"
             value={form.phone}
             onChange={(event) => setForm((current) => ({ ...current, phone: event.target.value }))}
+            onBlur={onPhoneBlur}
             placeholder="0 (5__) ___ __ __"
-            className="w-full rounded-2xl border border-brand-gray bg-bg-soft px-5 py-5 text-lg text-brand-charcoal outline-none transition-all focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/35"
+            aria-invalid={showPhoneError}
+            aria-describedby={showPhoneError ? "wizard-phone-error" : undefined}
+            className={`w-full rounded-2xl border bg-bg-soft px-5 py-5 text-lg text-brand-charcoal outline-none transition-all ${
+              showPhoneError
+                ? "border-red-400/70 focus:border-red-400 focus:ring-2 focus:ring-red-300/35"
+                : "border-brand-gray focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/35"
+            }`}
           />
-          <p className="mt-4 text-sm text-brand-charcoal/50">En az 10 karakter girildiğinde devam edebilirsiniz.</p>
+          {showPhoneError && (
+            <p id="wizard-phone-error" role="alert" className="mt-3 text-sm font-medium text-red-600/90">
+              Telefon numaranızı 05XX XXX XX XX formatında eksiksiz girin.
+            </p>
+          )}
         </div>
       )}
 
