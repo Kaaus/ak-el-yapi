@@ -78,7 +78,7 @@ export default function HeroWindowReveal() {
 
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-brand-charcoal" id="hero">
-      <div className="sticky left-0 top-0 flex h-[100svh] min-h-[100svh] w-full items-start justify-center overflow-hidden pb-4 pt-[clamp(7.5rem,20svh,10rem)] md:h-screen md:items-center md:pb-0 md:pt-0">
+      <div className="sticky left-0 top-0 flex h-[100svh] min-h-[100svh] w-full items-start justify-center overflow-hidden pb-2 pt-[clamp(9.25rem,22svh,11rem)] [@media(max-width:767px)_and_(max-height:640px)]:pt-36 md:h-screen md:items-center md:pb-0 md:pt-0">
         <motion.div style={backgroundMotionStyle} className="absolute inset-0 will-change-transform">
           <Image
             src={forestImage}
@@ -115,7 +115,7 @@ export default function HeroWindowReveal() {
               borderRadius: compactViewport ? 20 : frameRadius,
               borderWidth: compactViewport ? 5 : frameBorderWidth,
             }}
-            className="relative flex h-[calc(100svh-7rem)] w-[calc(100vw-2rem)] overflow-hidden border-white/90 bg-white/[0.04] shadow-[0_20px_60px_rgba(15,20,25,0.18),_inset_0_0_32px_rgba(0,0,0,0.2)] md:h-[70vh] md:w-[50vw] md:border-white/95 md:bg-white/8 md:shadow-[0_24px_80px_rgba(15,20,25,0.22),_inset_0_0_42px_rgba(0,0,0,0.34)]"
+            className="relative flex h-[calc(100svh-5rem)] w-[calc(100vw-2rem)] overflow-hidden border-white/90 bg-white/[0.04] shadow-[0_20px_60px_rgba(15,20,25,0.18),_inset_0_0_32px_rgba(0,0,0,0.2)] md:h-[70vh] md:w-[50vw] md:border-white/95 md:bg-white/8 md:shadow-[0_24px_80px_rgba(15,20,25,0.22),_inset_0_0_42px_rgba(0,0,0,0.34)]"
           >
             <div className="absolute inset-0 z-30 rounded-[inherit] ring-1 ring-black/10" />
 
@@ -157,17 +157,17 @@ export default function HeroWindowReveal() {
 
             <motion.div
               style={{
-                width: compactViewport ? 2 : centerBarWidth,
-                opacity: compactViewport ? 0.2 : centerBarOpacity,
+                width: compactViewport ? 2.5 : centerBarWidth,
+                opacity: compactViewport ? 0.3 : centerBarOpacity,
               }}
-              className="absolute bottom-0 left-1/2 top-0 z-40 block -translate-x-1/2 bg-white/50 md:bg-white/92 md:shadow-[0_0_18px_rgba(0,0,0,0.22)]"
+              className="absolute bottom-0 left-1/2 top-0 z-40 block -translate-x-1/2 bg-white/60 md:bg-white/92 md:shadow-[0_0_18px_rgba(0,0,0,0.22)]"
             />
           </motion.div>
         </motion.div>
 
         <motion.div
           style={{ y: textY, scale: textScale, filter: textBlur }}
-          className="relative z-30 mt-0 flex w-full max-w-[19rem] flex-col items-center justify-start gap-3.5 px-5 text-center md:mt-20 md:max-w-5xl md:justify-center md:gap-0 md:px-6"
+          className="relative z-30 mt-0 flex w-full max-w-[19rem] flex-col items-center justify-start gap-3.5 px-5 text-center [@media(max-width:767px)_and_(max-height:640px)]:gap-2.5 md:mt-20 md:max-w-5xl md:justify-center md:gap-0 md:px-6"
         >
           <motion.div
             initial={false}
@@ -232,7 +232,7 @@ export default function HeroWindowReveal() {
             <motion.div
               animate={shouldReduceMotion ? { y: 0 } : { y: [0, 6, 0] }}
               transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-              className="h-8 w-0.5 rounded-full bg-gradient-to-b from-white to-transparent"
+              className="h-8 w-0.5 rounded-full bg-gradient-to-b from-white to-transparent [@media(max-width:767px)_and_(max-height:640px)]:h-6"
             />
           </motion.div>
         </motion.div>
