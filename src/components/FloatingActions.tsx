@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, Info, MessageCircle, Phone, X } from "lucide-react";
 import { siteConfig } from "@/lib/site";
@@ -33,17 +33,37 @@ const actionButtons = [
 ];
 
 export default function FloatingActions() {
+  const showTopBtnRef = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showTopBtn, setShowTopBtn] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowTopBtn(window.scrollY > 500);
+    let frame = 0;
+
+    const updateVisibility = () => {
+      frame = 0;
+      const shouldShow = window.scrollY > 500;
+
+      if (showTopBtnRef.current === shouldShow) {
+        return;
+      }
+
+      showTopBtnRef.current = shouldShow;
+      setShowTopBtn(shouldShow);
     };
 
-    handleScroll();
+    const handleScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateVisibility);
+    };
+
+    updateVisibility();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const scrollToTop = () => {

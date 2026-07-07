@@ -21,35 +21,49 @@ export default function LazyVideo({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [canLoad, setCanLoad] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [pageIsVisible, setPageIsVisible] = useState(true);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const observer = new IntersectionObserver(
+    const loadObserver = new IntersectionObserver(
       ([entry]) => {
-        const nearViewport = entry.isIntersecting;
+        if (!entry.isIntersecting) return;
 
-        if (nearViewport) setCanLoad(true);
-        setIsVisible(nearViewport);
+        setCanLoad(true);
+        loadObserver.disconnect();
       },
       {
-        rootMargin: "260px 0px",
-        threshold: 0.12,
+        rootMargin: "220px 0px",
+        threshold: 0.01,
       }
     );
 
-    observer.observe(video);
+    const playObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting && entry.intersectionRatio >= 0.2);
+      },
+      {
+        threshold: [0, 0.2, 0.45],
+      }
+    );
 
-    return () => observer.disconnect();
+    loadObserver.observe(video);
+    playObserver.observe(video);
+
+    return () => {
+      loadObserver.disconnect();
+      playObserver.disconnect();
+    };
   }, []);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    if (!canLoad || shouldReduceMotion || !isVisible) {
+    if (!canLoad || shouldReduceMotion || !isVisible || !pageIsVisible) {
       video.pause();
       return;
     }
@@ -60,7 +74,23 @@ export default function LazyVideo({
         video.pause();
       });
     }
-  }, [canLoad, isVisible, shouldReduceMotion]);
+  }, [canLoad, isVisible, pageIsVisible, shouldReduceMotion]);
+
+  useEffect(() => {
+    const updatePageVisibility = () => {
+      const visible = !document.hidden;
+      setPageIsVisible(visible);
+
+      if (!visible) {
+        videoRef.current?.pause();
+      }
+    };
+
+    updatePageVisibility();
+    document.addEventListener("visibilitychange", updatePageVisibility);
+
+    return () => document.removeEventListener("visibilitychange", updatePageVisibility);
+  }, []);
 
   return (
     <video
@@ -69,7 +99,7 @@ export default function LazyVideo({
       muted
       loop
       playsInline
-      preload="none"
+      preload={canLoad ? "metadata" : "none"}
       poster={poster}
       aria-hidden={decorative ? "true" : undefined}
       aria-label={decorative ? undefined : ariaLabel}

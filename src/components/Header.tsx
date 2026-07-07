@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, type MouseEvent, useEffect, useState } from "react";
+import { type CSSProperties, type MouseEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -58,6 +58,7 @@ const mixRgba = (from: Rgba, to: Rgba, amount: number) => {
 export default function Header() {
   const pathname = usePathname();
   const lenis = useLenis();
+  const headerProgressRef = useRef(0);
   const [headerProgress, setHeaderProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -69,15 +70,27 @@ export default function Header() {
   const darkGlassProgress = range(progress, 0.05, 0.5);
 
   useEffect(() => {
+    if (!isHomePage) {
+      if (headerProgressRef.current !== 1) {
+        headerProgressRef.current = 1;
+        setHeaderProgress(1);
+      }
+
+      return;
+    }
+
     let frame = 0;
 
     const updateProgress = () => {
       frame = 0;
       const nextProgress = isHomePage ? clamp(window.scrollY / 156) : 1;
 
-      setHeaderProgress((current) =>
-        Math.abs(current - nextProgress) < 0.004 ? current : nextProgress,
-      );
+      if (Math.abs(headerProgressRef.current - nextProgress) < 0.004) {
+        return;
+      }
+
+      headerProgressRef.current = nextProgress;
+      setHeaderProgress(nextProgress);
     };
 
     const requestUpdate = () => {

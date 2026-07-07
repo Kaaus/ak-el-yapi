@@ -306,7 +306,33 @@ function ProductHoverVideo({
   src: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [canPreload, setCanPreload] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const shouldAttachSource = active || canPreload;
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video || !preloadOnIdle) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        setCanPreload(true);
+        observer.disconnect();
+      },
+      { rootMargin: "220px 0px", threshold: 0.01 },
+    );
+
+    observer.observe(video);
+
+    return () => observer.disconnect();
+  }, [preloadOnIdle]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -333,11 +359,11 @@ function ProductHoverVideo({
       muted
       loop
       playsInline
-      preload={preloadOnIdle ? "auto" : "none"}
+      preload={shouldAttachSource ? "metadata" : "none"}
       poster={poster}
       aria-label={ariaLabel}
     >
-      {active || preloadOnIdle ? <source src={src} type="video/mp4" /> : null}
+      {shouldAttachSource ? <source src={src} type="video/mp4" /> : null}
     </video>
   );
 }

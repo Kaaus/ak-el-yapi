@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
@@ -17,10 +18,67 @@ const serviceRhythm = [
 
 export default function ServicesIntroHero() {
   const shouldReduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
+  const [pageIsVisible, setPageIsVisible] = useState(true);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroVisible(entry.isIntersecting && entry.intersectionRatio >= 0.08);
+      },
+      { threshold: [0, 0.08, 0.2] },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) {
+      return;
+    }
+
+    if (shouldReduceMotion || !isHeroVisible || !pageIsVisible) {
+      video.pause();
+      return;
+    }
+
+    video.play().catch(() => {
+      video.pause();
+    });
+  }, [isHeroVisible, pageIsVisible, shouldReduceMotion]);
+
+  useEffect(() => {
+    const updatePageVisibility = () => {
+      const visible = !document.hidden;
+      setPageIsVisible(visible);
+
+      if (!visible) {
+        videoRef.current?.pause();
+      }
+    };
+
+    updatePageVisibility();
+    document.addEventListener("visibilitychange", updatePageVisibility);
+
+    return () => document.removeEventListener("visibilitychange", updatePageVisibility);
+  }, []);
 
   return (
-    <section className="relative isolate min-h-[88svh] overflow-hidden bg-brand-charcoal text-white">
+    <section ref={sectionRef} className="relative isolate min-h-[88svh] overflow-hidden bg-brand-charcoal text-white">
       <motion.video
+        ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay={!shouldReduceMotion}
         muted
