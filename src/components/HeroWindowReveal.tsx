@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
@@ -8,14 +8,18 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 const forestImage =
   "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2400&auto=format&fit=crop";
 
+const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
+
 export default function HeroWindowReveal() {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const [compactViewport, setCompactViewport] = useState(false);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const media = window.matchMedia("(max-width: 767px)");
-    const updateViewport = () => setCompactViewport(media.matches);
+    const updateViewport = () => {
+      setCompactViewport((current) => (current === media.matches ? current : media.matches));
+    };
 
     updateViewport();
     media.addEventListener("change", updateViewport);
@@ -89,8 +93,8 @@ export default function HeroWindowReveal() {
       };
 
   return (
-    <section ref={containerRef} className="relative h-[300svh] bg-brand-charcoal md:h-[300vh]" id="hero">
-      <div className="sticky left-0 top-0 isolate flex h-[100svh] min-h-[100svh] w-full items-start justify-center overflow-hidden bg-brand-charcoal pb-2 pt-[clamp(9.25rem,22svh,11rem)] [@media(max-width:767px)_and_(max-height:640px)]:pt-36 md:h-screen md:items-center md:pb-0 md:pt-0">
+    <section ref={containerRef} className="relative h-[300lvh] bg-brand-charcoal md:h-[300vh]" id="hero">
+      <div className="sticky left-0 top-0 isolate flex h-[100lvh] min-h-[100svh] w-full items-start justify-center overflow-hidden bg-brand-charcoal pb-2 pt-[clamp(9.25rem,22svh,11rem)] [@media(max-width:767px)_and_(max-height:640px)]:pt-36 md:h-screen md:items-center md:pb-0 md:pt-0">
         <motion.div style={backgroundMotionStyle} className="absolute inset-0 transform-gpu md:will-change-transform">
           <Image
             src={forestImage}
