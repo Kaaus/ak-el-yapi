@@ -92,8 +92,21 @@ export default function HeroWindowReveal() {
         filter: textBlur,
       };
 
+  const labelTransition = compactViewport
+    ? { duration: 0.32, delay: 0, ease: "easeOut" as const }
+    : { duration: 0.9, delay: 2.15, ease: "easeOut" as const };
+  const titleTransition = compactViewport
+    ? { duration: 0.36, delay: 0.04, ease: "easeOut" as const }
+    : { duration: 1.05, delay: 2.45, ease: [0.19, 1, 0.22, 1] as const };
+  const paragraphTransition = compactViewport
+    ? { duration: 0.34, delay: 0.08, ease: "easeOut" as const }
+    : { duration: 1.05, delay: 2.72, ease: [0.19, 1, 0.22, 1] as const };
+  const actionsTransition = compactViewport
+    ? { duration: 0.34, delay: 0.12, ease: "easeOut" as const }
+    : { duration: 1.05, delay: 2.95, ease: [0.19, 1, 0.22, 1] as const };
+
   return (
-    <section ref={containerRef} className="relative h-[300lvh] bg-brand-charcoal md:h-[300vh]" id="hero">
+    <section ref={containerRef} className="relative h-[170lvh] bg-brand-charcoal md:h-[300vh]" id="hero">
       <div className="sticky left-0 top-0 isolate flex h-[100lvh] min-h-[100svh] w-full items-start justify-center overflow-hidden bg-brand-charcoal pb-2 pt-[clamp(9.25rem,22svh,11rem)] [@media(max-width:767px)_and_(max-height:640px)]:pt-36 md:h-screen md:items-center md:pb-0 md:pt-0">
         <motion.div style={backgroundMotionStyle} className="absolute inset-0 transform-gpu md:will-change-transform">
           <Image
@@ -190,7 +203,7 @@ export default function HeroWindowReveal() {
           <motion.div
             initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 2.15, ease: "easeOut" }}
+            transition={labelTransition}
             style={{ opacity: labelOpacity }}
             className="max-w-[18rem] rounded-full border border-white/35 bg-white/18 px-3 py-1.5 text-[9px] font-bold uppercase leading-relaxed tracking-[0.2em] text-white shadow-2xl backdrop-blur-xl md:mb-5 md:max-w-none md:px-4 md:py-2 md:text-[10px] md:tracking-[0.34em]"
           >
@@ -200,7 +213,7 @@ export default function HeroWindowReveal() {
           <motion.h1
             initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.05, delay: 2.45, ease: [0.19, 1, 0.22, 1] }}
+            transition={titleTransition}
             style={{ opacity: titleOpacity }}
             className="text-balance font-heading text-[clamp(1.95rem,9.8vw,2.2rem)] font-bold leading-[1.05] tracking-tight text-white drop-shadow-[0_18px_45px_rgba(0,0,0,0.38)] md:text-7xl md:leading-[1.04] lg:text-8xl"
           >
@@ -212,7 +225,7 @@ export default function HeroWindowReveal() {
           <motion.p
             initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.05, delay: 2.72, ease: [0.19, 1, 0.22, 1] }}
+            transition={paragraphTransition}
             style={{ opacity: paragraphOpacity }}
             className="mx-auto max-w-[18rem] text-[13px] font-medium leading-5 text-white/86 drop-shadow-md md:mb-10 md:mt-7 md:max-w-2xl md:text-xl md:leading-relaxed"
           >
@@ -222,7 +235,7 @@ export default function HeroWindowReveal() {
           <motion.div
             initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.05, delay: 2.95, ease: [0.19, 1, 0.22, 1] }}
+            transition={actionsTransition}
             style={{ opacity: actionsOpacity }}
             className="flex w-full max-w-[17.5rem] flex-col items-center justify-center gap-2.5 md:w-auto md:max-w-none md:-translate-x-9 md:flex-row md:gap-12"
           >
