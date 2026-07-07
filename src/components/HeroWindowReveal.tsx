@@ -76,10 +76,22 @@ export default function HeroWindowReveal() {
           filter: bgFilter,
         };
 
+  const textMotionStyle = compactViewport
+    ? {
+        y: 0,
+        scale: 1,
+        filter: "none",
+      }
+    : {
+        y: textY,
+        scale: textScale,
+        filter: textBlur,
+      };
+
   return (
-    <section ref={containerRef} className="relative h-[300vh] bg-brand-charcoal" id="hero">
-      <div className="sticky left-0 top-0 flex h-[100svh] min-h-[100svh] w-full items-start justify-center overflow-hidden pb-2 pt-[clamp(9.25rem,22svh,11rem)] [@media(max-width:767px)_and_(max-height:640px)]:pt-36 md:h-screen md:items-center md:pb-0 md:pt-0">
-        <motion.div style={backgroundMotionStyle} className="absolute inset-0 will-change-transform">
+    <section ref={containerRef} className="relative h-[300svh] bg-brand-charcoal md:h-[300vh]" id="hero">
+      <div className="sticky left-0 top-0 isolate flex h-[100svh] min-h-[100svh] w-full items-start justify-center overflow-hidden bg-brand-charcoal pb-2 pt-[clamp(9.25rem,22svh,11rem)] [@media(max-width:767px)_and_(max-height:640px)]:pt-36 md:h-screen md:items-center md:pb-0 md:pt-0">
+        <motion.div style={backgroundMotionStyle} className="absolute inset-0 transform-gpu md:will-change-transform">
           <Image
             src={forestImage}
             alt=""
@@ -91,10 +103,10 @@ export default function HeroWindowReveal() {
           />
         </motion.div>
 
-        <motion.div style={{ opacity: darkOverlayOpacity }} className="absolute inset-0 bg-black" />
+        <motion.div style={{ opacity: compactViewport ? 0.22 : darkOverlayOpacity }} className="absolute inset-0 bg-black" />
 
         <motion.div
-          style={{ opacity: mistOpacity }}
+          style={{ opacity: compactViewport ? 0.18 : mistOpacity }}
           className="pointer-events-none absolute inset-0 z-[12] bg-[radial-gradient(ellipse_at_50%_50%,rgba(255,255,255,0)_0%,rgba(255,255,255,0)_34%,rgba(248,247,242,0.78)_72%,rgba(248,247,242,0.96)_100%)]"
         />
 
@@ -108,7 +120,7 @@ export default function HeroWindowReveal() {
             scale: compactViewport || shouldReduceMotion ? 1 : frameScale,
             opacity: compactViewport ? 0.92 : shouldReduceMotion ? 0.82 : frameOpacity,
           }}
-          className="pointer-events-none absolute inset-0 z-20 flex origin-center items-center justify-center pt-16 will-change-transform md:pt-0"
+          className="pointer-events-none absolute inset-0 z-20 flex origin-center items-center justify-center pt-16 md:pt-0 md:will-change-transform"
         >
           <motion.div
             style={{
@@ -126,15 +138,16 @@ export default function HeroWindowReveal() {
                 opacity: compactViewport ? 0.28 : shouldReduceMotion ? 0.55 : panelOpacity,
                 transformPerspective: 1400,
               }}
-              className="relative h-full w-1/2 origin-left overflow-hidden border-r-0 bg-white/8 backdrop-blur-[1px] will-change-transform md:border-r md:border-white/62 md:bg-white/14 md:backdrop-blur-[2px]"
+              className="relative h-full w-1/2 origin-left overflow-hidden border-r-0 bg-white/8 backdrop-blur-[1px] md:border-r md:border-white/62 md:bg-white/14 md:backdrop-blur-[2px] md:will-change-transform"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-white/24 via-white/6 to-transparent" />
-              <motion.div
-                animate={{ x: ["-130%", "145%"] }}
-                transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 1.8, ease: "easeInOut" }}
-                style={{ opacity: compactViewport ? 0 : 1 }}
-                className="absolute top-0 h-full w-1/3 -skew-x-12 bg-white/30 blur-sm"
-              />
+              {!compactViewport ? (
+                <motion.div
+                  animate={{ x: ["-130%", "145%"] }}
+                  transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 1.8, ease: "easeInOut" }}
+                  className="absolute top-0 h-full w-1/3 -skew-x-12 bg-white/30 blur-sm"
+                />
+              ) : null}
             </motion.div>
 
             <motion.div
@@ -144,15 +157,16 @@ export default function HeroWindowReveal() {
                 opacity: compactViewport ? 0.28 : shouldReduceMotion ? 0.55 : panelOpacity,
                 transformPerspective: 1400,
               }}
-              className="relative h-full w-1/2 origin-right overflow-hidden border-l-0 bg-white/8 backdrop-blur-[1px] will-change-transform md:border-l md:border-white/62 md:bg-white/14 md:backdrop-blur-[2px]"
+              className="relative h-full w-1/2 origin-right overflow-hidden border-l-0 bg-white/8 backdrop-blur-[1px] md:border-l md:border-white/62 md:bg-white/14 md:backdrop-blur-[2px] md:will-change-transform"
             >
               <div className="absolute inset-0 bg-gradient-to-tl from-white/24 via-white/6 to-transparent" />
-              <motion.div
-                animate={{ x: ["-120%", "150%"] }}
-                transition={{ duration: 3, repeat: Infinity, repeatDelay: 1.6, ease: "easeInOut" }}
-                style={{ opacity: compactViewport ? 0 : 1 }}
-                className="absolute top-0 h-full w-1/3 -skew-x-12 bg-white/26 blur-sm"
-              />
+              {!compactViewport ? (
+                <motion.div
+                  animate={{ x: ["-120%", "150%"] }}
+                  transition={{ duration: 3, repeat: Infinity, repeatDelay: 1.6, ease: "easeInOut" }}
+                  className="absolute top-0 h-full w-1/3 -skew-x-12 bg-white/26 blur-sm"
+                />
+              ) : null}
             </motion.div>
 
             <motion.div
@@ -166,7 +180,7 @@ export default function HeroWindowReveal() {
         </motion.div>
 
         <motion.div
-          style={{ y: textY, scale: textScale, filter: textBlur }}
+          style={textMotionStyle}
           className="relative z-30 mt-0 flex w-full max-w-[19rem] flex-col items-center justify-start gap-3.5 px-5 text-center [@media(max-width:767px)_and_(max-height:640px)]:gap-2.5 md:mt-20 md:max-w-5xl md:justify-center md:gap-0 md:px-6"
         >
           <motion.div

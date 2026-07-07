@@ -103,6 +103,7 @@ function ServiceBackgroundMedia({
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [canLoadVideo, setCanLoadVideo] = useState(false);
   const [canHover, setCanHover] = useState(true);
   const [mediaFailed, setMediaFailed] = useState(false);
 
@@ -133,7 +134,33 @@ function ServiceBackgroundMedia({
     return () => observer.disconnect();
   }, [service.mediaType]);
 
+  useEffect(() => {
+    const element = containerRef.current;
+
+    if (!element || service.mediaType !== "video") {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        setCanLoadVideo(true);
+        observer.disconnect();
+      },
+      { threshold: 0.01, rootMargin: "220px 0px" },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [service.mediaType]);
+
   const shouldPlayVideo = service.mediaType === "video" && !mediaFailed && (canHover ? isActive : isVisible);
+  const shouldAttachVideoSource =
+    service.mediaType === "video" && !mediaFailed && (canLoadVideo || isActive || isVisible);
 
   useEffect(() => {
     if (service.mediaType !== "video") {
@@ -205,12 +232,14 @@ function ServiceBackgroundMedia({
           muted
           loop
           playsInline
-          preload="metadata"
+          preload={shouldAttachVideoSource ? "metadata" : "none"}
           poster={service.posterSrc}
           onError={() => setMediaFailed(true)}
           aria-label={`${service.title} arka plan videosu`}
         >
-          <source src={service.mediaSrc} type="video/mp4" onError={() => setMediaFailed(true)} />
+          {shouldAttachVideoSource ? (
+            <source src={service.mediaSrc} type="video/mp4" onError={() => setMediaFailed(true)} />
+          ) : null}
         </video>
       )}
     </div>
