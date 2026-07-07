@@ -44,11 +44,15 @@ export default function HeroWindowReveal() {
   const darkOverlayOpacity = useTransform(scrollYProgress, [0, 0.68], [0.25, 0.1]);
   const mistOpacity = useTransform(scrollYProgress, [0, 0.42, 0.78], [0.86, 0.44, 0]);
   const lightBloomOpacity = useTransform(scrollYProgress, [0, 0.28, 0.72], [0.34, 0.22, 0.06]);
+  const mobileBgScale = useTransform(scrollYProgress, [0, 0.72], [1.04, 1.075]);
+  const mobileBgY = useTransform(scrollYProgress, [0, 0.72], ["0%", "1.1%"]);
 
   const frameScale = useTransform(scrollYProgress, [0, 0.68], [1, 3.05]);
   const frameOpacity = useTransform(scrollYProgress, [0, 0.7, 0.88], [1, 0.92, 0]);
   const frameRadius = useTransform(scrollYProgress, [0, 0.64], [18, 0]);
   const frameBorderWidth = useTransform(scrollYProgress, [0, 0.65], [18, 2]);
+  const mobileFrameScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.16]);
+  const mobileFrameOpacity = useTransform(scrollYProgress, [0, 0.62, 0.9], [0.94, 0.78, 0.68]);
 
   const leftPanelX = useTransform(scrollYProgress, [0, 0.58], ["0vw", "-36vw"]);
   const rightPanelX = useTransform(scrollYProgress, [0, 0.58], ["0vw", "36vw"]);
@@ -57,10 +61,14 @@ export default function HeroWindowReveal() {
   const panelOpacity = useTransform(scrollYProgress, [0, 0.5, 0.72], [1, 0.58, 0]);
   const centerBarOpacity = useTransform(scrollYProgress, [0, 0.55, 0.75], [1, 0.72, 0]);
   const centerBarWidth = useTransform(scrollYProgress, [0, 0.58], [14, 8]);
+  const mobilePanelOpacity = useTransform(scrollYProgress, [0, 0.55], [0.34, 0.16]);
+  const mobileCenterBarOpacity = useTransform(scrollYProgress, [0, 0.55], [0.42, 0.24]);
 
   const textY = useTransform(scrollYProgress, [0.12, 0.34], [0, -12]);
   const textScale = useTransform(scrollYProgress, [0.12, 0.34], [1, 0.98]);
   const textBlur = useTransform(scrollYProgress, [0.14, 0.34], ["blur(0px)", "blur(2px)"]);
+  const mobileTextY = useTransform(scrollYProgress, [0, 0.36], [0, -10]);
+  const mobileTextScale = useTransform(scrollYProgress, [0, 0.36], [1, 0.985]);
   const labelOpacity = useTransform(scrollYProgress, [0.08, 0.22], [1, 0]);
   const paragraphOpacity = useTransform(scrollYProgress, [0.1, 0.26], [1, 0]);
   const actionsOpacity = useTransform(scrollYProgress, [0.12, 0.3], [1, 0]);
@@ -70,7 +78,8 @@ export default function HeroWindowReveal() {
   const backgroundMotionStyle =
     compactViewport || shouldReduceMotion
       ? {
-          scale: 1.04,
+          scale: shouldReduceMotion ? 1.04 : mobileBgScale,
+          y: shouldReduceMotion ? "0%" : mobileBgY,
           filter: "saturate(0.92) contrast(0.98) brightness(1.02)",
         }
       : {
@@ -82,8 +91,8 @@ export default function HeroWindowReveal() {
 
   const textMotionStyle = compactViewport
     ? {
-        y: 0,
-        scale: 1,
+        y: shouldReduceMotion ? 0 : mobileTextY,
+        scale: shouldReduceMotion ? 1 : mobileTextScale,
         filter: "none",
       }
     : {
@@ -93,16 +102,16 @@ export default function HeroWindowReveal() {
       };
 
   const labelTransition = compactViewport
-    ? { duration: 0.32, delay: 0, ease: "easeOut" as const }
+    ? { duration: 0.46, delay: 0, ease: "easeOut" as const }
     : { duration: 0.9, delay: 2.15, ease: "easeOut" as const };
   const titleTransition = compactViewport
-    ? { duration: 0.36, delay: 0.04, ease: "easeOut" as const }
+    ? { duration: 0.52, delay: 0.04, ease: "easeOut" as const }
     : { duration: 1.05, delay: 2.45, ease: [0.19, 1, 0.22, 1] as const };
   const paragraphTransition = compactViewport
-    ? { duration: 0.34, delay: 0.08, ease: "easeOut" as const }
+    ? { duration: 0.5, delay: 0.08, ease: "easeOut" as const }
     : { duration: 1.05, delay: 2.72, ease: [0.19, 1, 0.22, 1] as const };
   const actionsTransition = compactViewport
-    ? { duration: 0.34, delay: 0.12, ease: "easeOut" as const }
+    ? { duration: 0.5, delay: 0.12, ease: "easeOut" as const }
     : { duration: 1.05, delay: 2.95, ease: [0.19, 1, 0.22, 1] as const };
 
   return (
@@ -134,8 +143,8 @@ export default function HeroWindowReveal() {
 
         <motion.div
           style={{
-            scale: compactViewport || shouldReduceMotion ? 1 : frameScale,
-            opacity: compactViewport ? 0.92 : shouldReduceMotion ? 0.82 : frameOpacity,
+            scale: compactViewport ? (shouldReduceMotion ? 1 : mobileFrameScale) : shouldReduceMotion ? 1 : frameScale,
+            opacity: compactViewport ? (shouldReduceMotion ? 0.92 : mobileFrameOpacity) : shouldReduceMotion ? 0.82 : frameOpacity,
           }}
           className="pointer-events-none absolute inset-0 z-20 flex origin-center items-center justify-center pt-16 md:pt-0 md:will-change-transform"
         >
@@ -152,7 +161,7 @@ export default function HeroWindowReveal() {
               style={{
                 x: shouldReduceMotion ? 0 : leftPanelX,
                 rotateY: shouldReduceMotion || compactViewport ? 0 : leftPanelRotate,
-                opacity: compactViewport ? 0.28 : shouldReduceMotion ? 0.55 : panelOpacity,
+                opacity: compactViewport ? (shouldReduceMotion ? 0.28 : mobilePanelOpacity) : shouldReduceMotion ? 0.55 : panelOpacity,
                 transformPerspective: 1400,
               }}
               className="relative h-full w-1/2 origin-left overflow-hidden border-r-0 bg-white/8 backdrop-blur-[1px] md:border-r md:border-white/62 md:bg-white/14 md:backdrop-blur-[2px] md:will-change-transform"
@@ -171,7 +180,7 @@ export default function HeroWindowReveal() {
               style={{
                 x: shouldReduceMotion ? 0 : rightPanelX,
                 rotateY: shouldReduceMotion || compactViewport ? 0 : rightPanelRotate,
-                opacity: compactViewport ? 0.28 : shouldReduceMotion ? 0.55 : panelOpacity,
+                opacity: compactViewport ? (shouldReduceMotion ? 0.28 : mobilePanelOpacity) : shouldReduceMotion ? 0.55 : panelOpacity,
                 transformPerspective: 1400,
               }}
               className="relative h-full w-1/2 origin-right overflow-hidden border-l-0 bg-white/8 backdrop-blur-[1px] md:border-l md:border-white/62 md:bg-white/14 md:backdrop-blur-[2px] md:will-change-transform"
@@ -189,7 +198,7 @@ export default function HeroWindowReveal() {
             <motion.div
               style={{
                 width: compactViewport ? 3 : centerBarWidth,
-                opacity: compactViewport ? 0.36 : centerBarOpacity,
+                opacity: compactViewport ? (shouldReduceMotion ? 0.36 : mobileCenterBarOpacity) : centerBarOpacity,
               }}
               className="absolute bottom-0 left-1/2 top-0 z-40 block -translate-x-1/2 bg-white/70 md:bg-white/92 md:shadow-[0_0_18px_rgba(0,0,0,0.22)]"
             />
